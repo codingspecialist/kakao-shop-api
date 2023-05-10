@@ -1,14 +1,12 @@
 package com.example.kakao.products;
 
-import com.example.kakao._core.errors.exception.Exception400;
-import com.example.kakao._core.utils.ApiUtils.ApiResult;
+import com.example.kakao._core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static com.example.kakao._core.utils.ApiUtils.success;
-import static java.util.stream.Collectors.toList;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,10 +20,10 @@ public class ProductRestController {
      * 전체 상품 리스트를 반환
      */
     @GetMapping("/products")
-    public ApiResult<List<ProductDto>> findAll(@RequestParam(defaultValue = "0") int page) {
-        return success(productService.findAll(page).stream()
-                .map(ProductDto::new)
-                .collect(toList()));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int page) {
+        ProductResponse.FindAllDTO findAllDTO = productService.findAll(page);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(findAllDTO);
+        return ResponseEntity.ok(apiResult);
     }
 
     /**
@@ -36,9 +34,9 @@ public class ProductRestController {
      * 해당 상품 정보를 반환
      */
     @GetMapping("/products/{id}")
-    public ApiResult<ProductDto> findById(@PathVariable int id) {
-        return success(productService.findById(id)
-                .map(ProductDto::new)
-                .orElseThrow(()-> new Exception400("Could not found product for " + id)));
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        ProductResponse.FindByIdDTO findByIdDTO = productService.findById(id);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(findByIdDTO);
+        return ResponseEntity.ok(apiResult);
     }
 }

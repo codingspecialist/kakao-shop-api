@@ -23,7 +23,7 @@ public class OptionRestController {
      * @return
      * 성공 시 Option 리스트 반환
      */
-    @GetMapping("/products/{id}/option")
+    @GetMapping("/products/{id}/options")
     public ApiResult<List<OptionDto>> findByProductId(@PathVariable int id) {
         return success(optionService.findByProductId(id).stream()
                 .map(OptionDto::new)
