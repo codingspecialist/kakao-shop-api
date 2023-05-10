@@ -3,15 +3,15 @@ CREATE SCHEMA IF NOT EXISTS `kakao` DEFAULT CHARACTER SET utf8mb4;
 USE `kakao`;
 
 
-DROP TABLE IF EXISTS `member_tb`;
-CREATE TABLE `member_tb` (
-                             `member_id` int(11) NOT NULL AUTO_INCREMENT,
-                             `email` varchar(100) NOT NULL,
-                             `password` varchar(256) NOT NULL,
-                             `user_name` varchar(45) NOT NULL,
-                             `roles` varchar(30) DEFAULT NULL,
-                             PRIMARY KEY (`member_id`),
-                             UNIQUE KEY `user_id_UNIQUE` (`email`)
+DROP TABLE IF EXISTS `user_tb`;
+CREATE TABLE `user_tb` (
+                           `user_id` int(11) NOT NULL AUTO_INCREMENT,
+                           `email` varchar(100) NOT NULL,
+                           `password` varchar(256) NOT NULL,
+                           `username` varchar(45) NOT NULL,
+                           `roles` varchar(30) DEFAULT NULL,
+                           PRIMARY KEY (`user_id`),
+                           UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -58,9 +58,9 @@ CREATE TABLE `option_tb` (
 DROP TABLE IF EXISTS `order_tb`;
 CREATE TABLE `order_tb` (
                             `order_id` int(11) NOT NULL AUTO_INCREMENT,
-                            `member_id` int(11) NOT NULL,
+                            `user_id` int(11) NOT NULL,
                             PRIMARY KEY (`order_id`),
-                            KEY `order_member_id_idx` (`member_id`)
+                            KEY `order_user_id_idx` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

@@ -8,36 +8,21 @@
 - request body : 
 ```json
 {
-    "email":"ssar@nate.com",
-    "password":"1234",
-    "userName":"ssar"
+  "email":"ssar@nate.com",
+  "password":"1234",
+  "username":"ssar"
 }
 ```
 - response body : 
 ```json
 {
-    "memberId": 3,
+  "success": true,
+  "response": {
+    "userId": 3,
     "email": "ssar@nate.com",
-    "password": "{bcrypt}$2a$10$7x7gfHymZvlvwlSHgEeWX.OQw5jDtuUQU7DfHYbz4StGefFeQYn9q",
-    "roles": [
-        "ROLE_USER"
-    ],
-    "name": "ssar",
-    "enabled": true,
-    "role": [
-        "ROLE_USER"
-    ],
-    "username": "ssar@nate.com",
-    "authorities": [
-        {
-            "authority": "ROLE_USER"
-        }
-    ],
-    "pwd": "{bcrypt}$2a$10$7x7gfHymZvlvwlSHgEeWX.OQw5jDtuUQU7DfHYbz4StGefFeQYn9q",
-    "accountNonLocked": true,
-    "userId": "ssar@nate.com",
-    "credentialsNonExpired": true,
-    "accountNonExpired": true
+    "username": "ssar"
+  },
+  "error": null
 }
 ```
 
@@ -47,13 +32,22 @@
 - request body :
 ```json
 {
-    "userId":"ssar@nate.com",
-    "password":"1234"
+  "email":"ssar@nate.com",
+  "password":"1234"
 }
 ```
 - response body :
+```json
+{
+  "success": true,
+  "response": null,
+  "error": null
+}
+```
+
+- response header :
 ```text
-eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZXMiOlsissUk9MRV9VU0VSIl0sImlhdCI6MTY4MzYwMzg3MSwiZXhwIjoxNjgzNjA1NjcxfQ.TFuk17EJQtoMs1sjAfNZ1fgJdVrHjH3NXxv_F5nqSsw
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlkIjozLCJleHAiOjE2ODM3MzEzOTZ9.4o5as1_PpUcMjUTTYI9i7Xz7lgisqC62wBNyE85qbE5stBMxYIBlWgE4tdNKKzBsLyJ3ZhsiNYssh8y6v7zs0A
 ```
 
 ```text
@@ -72,6 +66,10 @@ email, roles
 ```
 - response body :
 ```text
-available
+{
+    "success": true,
+    "response": null,
+    "error": null
+}
 ```
 
