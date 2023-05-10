@@ -73,3 +73,20 @@ email, roles
 }
 ```
 
+### 4. 상품목록 보기
+- method : post
+- url : http://localhost:8080/check
+- request body :
+```json
+{
+    "email":"cos@nate.com"
+}
+```
+- response body :
+```text
+{
+    "success": true,
+    "response": null,
+    "error": null
+}
+```
