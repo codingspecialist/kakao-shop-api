@@ -1,42 +1,57 @@
 package com.example.kakao.users;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.kakao._core.errors.exception.Exception400;
+import com.example.kakao._core.errors.exception.Exception401;
+import com.example.kakao._core.errors.exception.Exception500;
+import com.example.kakao._core.security.CustomUserDetails;
+import com.example.kakao._core.security.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+import java.util.Optional;
 
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 @Service
 public class UserService {
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+    private final UserJPARepository userJPARepository;
 
-    @Autowired
-    private UserJPARepository userJPARepository;
-
-    private int memberId = 1;
-
-    public User save(UserDTO.Request userDTO) {
-        userDTO.setMemberId(memberId++);
-        User newUser = userDTO.toEntity();
-        System.out.println("pwd : " + newUser.getPwd());
-        newUser.setPassword(passwordEncoder.encode(newUser.getPwd()));
-        System.out.println("Role : " + newUser.getRoles());
-        return userJPARepository.save(newUser);
+    @Transactional
+    public UserResponse.JoinOutDTO join(UserRequest.JoinInDTO joinInDTO) {
+        joinInDTO.setPassword(passwordEncoder.encode(joinInDTO.getPassword()));
+        try {
+            User userPS = userJPARepository.save(joinInDTO.toEntity());
+            return new UserResponse.JoinOutDTO(userPS);
+        }catch (Exception e){
+            throw new Exception500(e.getMessage());
+        }
     }
 
-    public User login(Map<String, String> user) {
-        User member = userJPARepository.findByEmail(user.get("userId")).orElse(null);
-
-        if (member != null && passwordEncoder.matches(user.get("password"), member.getPassword()))
-            return member;
-
-        return null;
+    public String login(UserRequest.LoginInDTO loginInDTO) {
+        try {
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                    = new UsernamePasswordAuthenticationToken(loginInDTO.getEmail(), loginInDTO.getPassword());
+            Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+            CustomUserDetails myUserDetails = (CustomUserDetails) authentication.getPrincipal();
+            return JwtTokenProvider.create(myUserDetails.getUser());
+        }catch (Exception e){
+            throw new Exception401("인증되지 않았습니다");
+        }
     }
 
-    public User findById(String userId) {
-        System.out.println("findById:" + userId);
-
-        return userJPARepository.findByEmail(userId).orElse(null);
+    public void sameCheckEmail(String email) {
+        Optional<User> userOP = userJPARepository.findByEmail(email);
+        if(userOP.isPresent()){
+            throw new Exception400("동일한 이메일이 존재합니다 : "+email);
+        }
     }
 }

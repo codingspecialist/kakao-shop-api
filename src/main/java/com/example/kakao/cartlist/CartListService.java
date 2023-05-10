@@ -33,7 +33,7 @@ public class CartListService {
         List<CartList> newCartLists = new ArrayList<>();
 
         for(CartListDto.Request cartListDTO : cartListDTOs) {
-            cartListDTO.setCartId(user.getMemberId());
+            cartListDTO.setCartId(user.getUserId());
             CartList newCartList = cartListDTO.toEntity();
             newCartLists.add(newCartList);
         }
@@ -45,7 +45,7 @@ public class CartListService {
         List<CartList> updateCartLists = new ArrayList<>();
 
         for(CartListDto.Request cartListDTO : cartListDTOs) {
-            cartListDTO.setCartId(user.getMemberId());
+            cartListDTO.setCartId(user.getUserId());
             CartList newCartList = cartListDTO.toEntity();
             updateCartLists.add(newCartList);
         }
@@ -54,7 +54,7 @@ public class CartListService {
     }
 
     public List<CartListDto.Response> findAll(User user) {
-        List<CartList> cartLists = cartListJPARepository.findByCartIdOrderByOptionIdAsc(user.getMemberId());
+        List<CartList> cartLists = cartListJPARepository.findByCartIdOrderByOptionIdAsc(user.getUserId());
         List<CartListDto.Response> cartListDTOs = new ArrayList<>();
 
         for(CartList cartList : cartLists) {
@@ -72,6 +72,6 @@ public class CartListService {
     }
 
     public void clear(User user) {
-        cartListJPARepository.deleteByCartId(user.getMemberId());
+        cartListJPARepository.deleteByCartId(user.getUserId());
     }
 }

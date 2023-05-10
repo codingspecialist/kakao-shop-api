@@ -4,21 +4,21 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+@Setter // 삭제 예정
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 @Table(name="order_tb")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    private int memberId;
+    private int userId;
 
     @Builder
-    public Order (int orderId, int memberId) {
+    public Order(int orderId, int userId) {
         this.orderId = orderId;
-        this.memberId = memberId;
+        this.userId = userId;
     }
 }

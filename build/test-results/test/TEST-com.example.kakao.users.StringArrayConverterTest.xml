@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.kakao.users.StringArrayConverterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-10T10:39:22" hostname="GETINTHERE" time="0.015">
+  <properties/>
+  <testcase name="convertToEntityAttribute_test()" classname="com.example.kakao.users.StringArrayConverterTest" time="0.015"/>
+  <system-out><![CDATA[테스트 : [ROLE_USER, ROLE_ADMIN]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

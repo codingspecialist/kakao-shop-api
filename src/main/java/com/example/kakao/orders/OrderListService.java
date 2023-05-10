@@ -5,29 +5,25 @@ import com.example.kakao.options.OptionJPARepository;
 import com.example.kakao.products.Product;
 import com.example.kakao.products.ProductJPARepository;
 import com.example.kakao.users.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class OrderListService {
 
-    @Autowired
-    OrderListJPARepository orderListJPARepository;
-
-    @Autowired
-    OrderJPARepository orderJPARepository;
-
-    @Autowired
-    OptionJPARepository optionJPARepository;
-    @Autowired
-    ProductJPARepository productJPARepository;
+    private final OrderListJPARepository orderListJPARepository;
+    private final OrderJPARepository orderJPARepository;
+    private final OptionJPARepository optionJPARepository;
+    private final ProductJPARepository productJPARepository;
 
     public List<OrderList> saveOrderList(List<OrderListDto.Request> orderListDTOs, User user) {
         Order order = new Order();
-        order.setMemberId(user.getMemberId());
+        order.setUserId(user.getUserId());
 
         Order newOrder = orderJPARepository.save(order);
 
@@ -59,9 +55,6 @@ public class OrderListService {
         return orderListDTOs;
     }
 
-    /**
-     * order 테이블 비우기
-     */
     public void clear() {
         orderListJPARepository.deleteAll();
     }

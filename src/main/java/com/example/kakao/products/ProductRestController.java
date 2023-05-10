@@ -1,13 +1,13 @@
 package com.example.kakao.products;
 
-import com.example.kakao.errors.NotFoundException;
-import com.example.kakao.utils.ApiUtils.ApiResult;
+import com.example.kakao._core.errors.exception.Exception400;
+import com.example.kakao._core.utils.ApiUtils.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.kakao.utils.ApiUtils.success;
+import static com.example.kakao._core.utils.ApiUtils.success;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -40,6 +40,6 @@ public class ProductRestController {
     public ApiResult<ProductDto> findById(@PathVariable int id) {
         return success(productService.findById(id)
                 .map(ProductDto::new)
-                .orElseThrow(()-> new NotFoundException("Could not found product for " + id)));
+                .orElseThrow(()-> new Exception400("Could not found product for " + id)));
     }
 }

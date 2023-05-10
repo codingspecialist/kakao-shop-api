@@ -14,7 +14,6 @@ public class CartList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartListId;
-
     private int cartId;
     private int optionId;
     private int quantity;

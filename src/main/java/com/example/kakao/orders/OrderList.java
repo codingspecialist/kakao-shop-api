@@ -1,15 +1,12 @@
 package com.example.kakao.orders;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 @Table(name="order_list_tb")
 public class OrderList {
 
@@ -19,7 +16,6 @@ public class OrderList {
     private int optionId;
     private int quantity;
     private int price;
-
     private int orderId;
 
     @Builder

@@ -1,6 +1,6 @@
 package com.example.kakao.options;
 
-import com.example.kakao.utils.ApiUtils.ApiResult;
+import com.example.kakao._core.utils.ApiUtils.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.example.kakao.utils.ApiUtils.success;
+import static com.example.kakao._core.utils.ApiUtils.success;
 import static java.util.stream.Collectors.toList;
 
 @RestController

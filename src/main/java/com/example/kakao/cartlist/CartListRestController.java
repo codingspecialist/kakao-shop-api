@@ -6,8 +6,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import com.example.kakao.utils.ApiUtils.ApiResult;
-import static com.example.kakao.utils.ApiUtils.success;
+import com.example.kakao._core.utils.ApiUtils.ApiResult;
+import static com.example.kakao._core.utils.ApiUtils.success;
 import static java.util.stream.Collectors.toList;
 
 @RestController

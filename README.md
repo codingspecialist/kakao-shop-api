@@ -53,11 +53,25 @@
 ```
 - response body :
 ```text
-eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY4MzYwMzg3MSwiZXhwIjoxNjgzNjA1NjcxfQ.TFuk17EJQtoMs1sjAfNZ1fgJdVrHjH3NXxv_F5nqSsw
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZXMiOlsissUk9MRV9VU0VSIl0sImlhdCI6MTY4MzYwMzg3MSwiZXhwIjoxNjgzNjA1NjcxfQ.TFuk17EJQtoMs1sjAfNZ1fgJdVrHjH3NXxv_F5nqSsw
 ```
 
 ```text
 토큰에 담긴 페이로드
 email, roles
+```
+
+### 3. 동일 이메일 체크
+- method : post
+- url : http://localhost:8080/check
+- request body :
+```json
+{
+    "email":"cos@nate.com"
+}
+```
+- response body :
+```text
+available
 ```
 

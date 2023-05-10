@@ -1,15 +1,12 @@
 package com.example.kakao.options;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 @Table(name="option_tb")
 public class Option {
 
@@ -20,15 +17,11 @@ public class Option {
     private String optionName;
     private int price;
 
-    @AllArgsConstructor
-    public static class Builder {
-        private int optionId;
-        private int productId;
-        private String optionName;
-        private int price;
-
-        public Option build() {
-            return new Option(optionId, productId, optionName, price);
-        }
+    @Builder
+    public Option(int optionId, int productId, String optionName, int price) {
+        this.optionId = optionId;
+        this.productId = productId;
+        this.optionName = optionName;
+        this.price = price;
     }
 }

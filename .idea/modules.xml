@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.kakao.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kakao-shop-backend.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kakao-shop-backend.kakao.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kakao.main.iml" />
     </modules>
   </component>
