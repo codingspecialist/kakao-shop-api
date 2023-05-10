@@ -65,7 +65,7 @@ email, roles
 }
 ```
 - response body :
-```text
+```json
 {
     "success": true,
     "response": null,
@@ -75,18 +75,102 @@ email, roles
 
 ### 4. 상품목록 보기
 - method : post
-- url : http://localhost:8080/check
-- request body :
-```json
-{
-    "email":"cos@nate.com"
-}
+- url : http://localhost:8080/products
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
 ```
 - response body :
-```text
+```json
 {
-    "success": true,
-    "response": null,
-    "error": null
+  "success": true,
+  "response": [
+    {
+      "productId": 1,
+      "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+      "description": "",
+      "image": "/images/1.jpg",
+      "price": 1000
+    },
+    {
+      "productId": 2,
+      "productName": "[황금약단밤 골드]2022년산 햇밤 칼집밤700g외/군밤용/생율",
+      "description": "",
+      "image": "/images/2.jpg",
+      "price": 2000
+    },
+    {
+      "productId": 3,
+      "productName": "삼성전자 JBL JR310 외 어린이용/성인용 헤드셋 3종!",
+      "description": "",
+      "image": "/images/3.jpg",
+      "price": 30000
+    },
+    {
+      "productId": 4,
+      "productName": "바른 누룽지맛 발효효소 2박스 역가수치보장 / 외 7종",
+      "description": "",
+      "image": "/images/4.jpg",
+      "price": 4000
+    },
+    {
+      "productId": 5,
+      "productName": "[더주] 컷팅말랑장족, 숏다리 100g/300g 외 주전부리 모음 /중독성 최고/마른안주",
+      "description": "",
+      "image": "/images/5.jpg",
+      "price": 5000
+    },
+    {
+      "productId": 6,
+      "productName": "굳지않는 앙금절편 1,050g 2팩 외 우리쌀떡 모음전",
+      "description": "",
+      "image": "/images/6.jpg",
+      "price": 15900
+    },
+    {
+      "productId": 7,
+      "productName": "eoe 이너딜리티 30포, 오렌지맛 고 식이섬유 보충제",
+      "description": "",
+      "image": "/images/7.jpg",
+      "price": 26800
+    },
+    {
+      "productId": 8,
+      "productName": "제나벨 PDRN 크림 2개. 피부보습/진정 케어",
+      "description": "",
+      "image": "/images/8.jpg",
+      "price": 25900
+    },
+    {
+      "productId": 9,
+      "productName": "플레이스테이션 VR2 호라이즌 번들. 생생한 몰입감",
+      "description": "",
+      "image": "/images/9.jpg",
+      "price": 797000
+    }
+  ],
+  "error": null
+}
+```
+
+### 5. 상품 한건 보기
+- method : post`
+- url : http://localhost:8080/products/{id}
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- response body :
+```json
+{
+  "success": true,
+  "response": {
+    "productId": 1,
+    "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+    "description": "",
+    "image": "/images/1.jpg",
+    "price": 1000
+  },
+  "error": null
 }
 ```

@@ -2,7 +2,7 @@ package com.example.kakao.products;
 
 import com.example.kakao._core.errors.exception.Exception400;
 import com.example.kakao._core.utils.ApiUtils.ApiResult;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,12 +10,12 @@ import java.util.List;
 import static com.example.kakao._core.utils.ApiUtils.success;
 import static java.util.stream.Collectors.toList;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/products")
 public class ProductRestController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     /**
      * [판매자&구매자 공통 기능] 전체 상품 조회
@@ -23,7 +23,7 @@ public class ProductRestController {
      * 전체 상품 리스트를 반환
      */
     @GetMapping
-    public ApiResult<List<ProductDto>> findAll(@RequestParam int page) {
+    public ApiResult<List<ProductDto>> findAll(@RequestParam(defaultValue = "0") int page) {
         return success(productService.findAll(page).stream()
                 .map(ProductDto::new)
                 .collect(toList()));
