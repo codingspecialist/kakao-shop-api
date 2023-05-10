@@ -174,3 +174,50 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
   "error": null
 }
 ```
+
+### 6. 상품 옵션 보기
+- method : post`
+- url : http://localhost:8080/products/{id}/option
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- response body :
+```json
+{
+  "success": true,
+  "response": [
+    {
+      "optionId": 1,
+      "productId": 1,
+      "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+      "price": 10000
+    },
+    {
+      "optionId": 2,
+      "productId": 1,
+      "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
+      "price": 10900
+    },
+    {
+      "optionId": 3,
+      "productId": 1,
+      "optionName": "고무장갑 베이지 S(소형) 6팩",
+      "price": 9900
+    },
+    {
+      "optionId": 4,
+      "productId": 1,
+      "optionName": "뽑아쓰는 키친타올 130매 12팩",
+      "price": 16900
+    },
+    {
+      "optionId": 5,
+      "productId": 1,
+      "optionName": "2겹 식빵수세미 6매",
+      "price": 8900
+    }
+  ],
+  "error": null
+}
+```

@@ -12,7 +12,6 @@ import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/products")
 public class ProductRestController {
 
     private final ProductService productService;
@@ -22,7 +21,7 @@ public class ProductRestController {
      * @return
      * 전체 상품 리스트를 반환
      */
-    @GetMapping
+    @GetMapping("/products")
     public ApiResult<List<ProductDto>> findAll(@RequestParam(defaultValue = "0") int page) {
         return success(productService.findAll(page).stream()
                 .map(ProductDto::new)
@@ -36,7 +35,7 @@ public class ProductRestController {
      * @return
      * 해당 상품 정보를 반환
      */
-    @GetMapping("{id}")
+    @GetMapping("/products/{id}")
     public ApiResult<ProductDto> findById(@PathVariable int id) {
         return success(productService.findById(id)
                 .map(ProductDto::new)
