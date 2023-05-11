@@ -16,7 +16,7 @@ public class UserService {
 
     private int memberId = 1;
 
-    public User save(UserDTO.Request userDTO) {
+    synchronized public User save(UserDTO.Request userDTO) {
         userDTO.setMemberId(memberId++);
         User newUser = userDTO.toEntity();
         System.out.println("pwd : " + newUser.getPwd());
