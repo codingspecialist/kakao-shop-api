@@ -235,38 +235,40 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```json
 {
   "success": true,
-  "response": [
-    {
-      "id": 1,
-      "productId": 0,
-      "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
-      "price": 10000
-    },
-    {
-      "id": 2,
-      "productId": 0,
-      "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
-      "price": 10900
-    },
-    {
-      "id": 3,
-      "productId": 0,
-      "optionName": "고무장갑 베이지 S(소형) 6팩",
-      "price": 9900
-    },
-    {
-      "id": 4,
-      "productId": 0,
-      "optionName": "뽑아쓰는 키친타올 130매 12팩",
-      "price": 16900
-    },
-    {
-      "id": 5,
-      "productId": 0,
-      "optionName": "2겹 식빵수세미 6매",
-      "price": 8900
-    }
-  ],
+  "response": {
+    "options": [
+      {
+        "id": 1,
+        "productId": 0,
+        "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+        "price": 10000
+      },
+      {
+        "id": 2,
+        "productId": 0,
+        "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
+        "price": 10900
+      },
+      {
+        "id": 3,
+        "productId": 0,
+        "optionName": "고무장갑 베이지 S(소형) 6팩",
+        "price": 9900
+      },
+      {
+        "id": 4,
+        "productId": 0,
+        "optionName": "뽑아쓰는 키친타올 130매 12팩",
+        "price": 16900
+      },
+      {
+        "id": 5,
+        "productId": 0,
+        "optionName": "2겹 식빵수세미 6매",
+        "price": 8900
+      }
+    ]
+  },
   "error": null
 }
 ```
@@ -282,296 +284,298 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```json
 {
   "success": true,
-  "response": [
-    {
-      "id": 1,
-      "productId": 0,
-      "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
-      "price": 10000
-    },
-    {
-      "id": 2,
-      "productId": 0,
-      "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
-      "price": 10900
-    },
-    {
-      "id": 3,
-      "productId": 0,
-      "optionName": "고무장갑 베이지 S(소형) 6팩",
-      "price": 9900
-    },
-    {
-      "id": 4,
-      "productId": 0,
-      "optionName": "뽑아쓰는 키친타올 130매 12팩",
-      "price": 16900
-    },
-    {
-      "id": 5,
-      "productId": 0,
-      "optionName": "2겹 식빵수세미 6매",
-      "price": 8900
-    },
-    {
-      "id": 6,
-      "productId": 0,
-      "optionName": "22년산 햇단밤 700g(한정판매)",
-      "price": 9900
-    },
-    {
-      "id": 7,
-      "productId": 0,
-      "optionName": "22년산 햇단밤 1kg(한정판매)",
-      "price": 14500
-    },
-    {
-      "id": 8,
-      "productId": 0,
-      "optionName": "밤깎기+다회용 구이판 세트",
-      "price": 5500
-    },
-    {
-      "id": 9,
-      "productId": 0,
-      "optionName": "JR310 (유선 전용) - 블루",
-      "price": 29900
-    },
-    {
-      "id": 10,
-      "productId": 0,
-      "optionName": "JR310BT (무선 전용) - 레드",
-      "price": 49900
-    },
-    {
-      "id": 11,
-      "productId": 0,
-      "optionName": "JR310BT (무선 전용) - 그린",
-      "price": 49900
-    },
-    {
-      "id": 12,
-      "productId": 0,
-      "optionName": "JR310BT (무선 전용) - 블루",
-      "price": 49900
-    },
-    {
-      "id": 13,
-      "productId": 0,
-      "optionName": "T510BT (무선 전용) - 블랙",
-      "price": 52900
-    },
-    {
-      "id": 14,
-      "productId": 0,
-      "optionName": "T510BT (무선 전용) - 화이트",
-      "price": 52900
-    },
-    {
-      "id": 15,
-      "productId": 0,
-      "optionName": "선택01_바른곡물효소 누룽지맛 2박스",
-      "price": 17900
-    },
-    {
-      "id": 16,
-      "productId": 0,
-      "optionName": "선택02_바른곡물효소누룽지맛 6박스",
-      "price": 50000
-    },
-    {
-      "id": 17,
-      "productId": 0,
-      "optionName": "선택03_바른곡물효소3박스+유산균효소3박스",
-      "price": 50000
-    },
-    {
-      "id": 18,
-      "productId": 0,
-      "optionName": "선택04_바른곡물효소3박스+19종유산균3박스",
-      "price": 50000
-    },
-    {
-      "id": 19,
-      "productId": 0,
-      "optionName": "01. 말랑컷팅장족 100g",
-      "price": 4900
-    },
-    {
-      "id": 20,
-      "productId": 0,
-      "optionName": "02. 말랑컷팅장족 300g",
-      "price": 12800
-    },
-    {
-      "id": 21,
-      "productId": 0,
-      "optionName": "03. 눌린장족 100g",
-      "price": 4900
-    },
-    {
-      "id": 22,
-      "productId": 0,
-      "optionName": "굳지않는 쑥 앙금 절편 1050g",
-      "price": 15900
-    },
-    {
-      "id": 23,
-      "productId": 0,
-      "optionName": "굳지않는 흑미 앙금 절편 1050g",
-      "price": 15900
-    },
-    {
-      "id": 24,
-      "productId": 0,
-      "optionName": "굳지않는 흰 가래떡 1050g",
-      "price": 15900
-    },
-    {
-      "id": 25,
-      "productId": 0,
-      "optionName": "이너딜리티 1박스",
-      "price": 26800
-    },
-    {
-      "id": 26,
-      "productId": 0,
-      "optionName": "이너딜리티 2박스+사은품 2종",
-      "price": 49800
-    },
-    {
-      "id": 27,
-      "productId": 0,
-      "optionName": "제나벨 PDRN 자생크림 1+1",
-      "price": 25900
-    },
-    {
-      "id": 28,
-      "productId": 0,
-      "optionName": "플레이스테이션 VR2 호라이즌 번들",
-      "price": 839000
-    },
-    {
-      "id": 29,
-      "productId": 0,
-      "optionName": "플레이스테이션 VR2",
-      "price": 797000
-    },
-    {
-      "id": 30,
-      "productId": 0,
-      "optionName": "홍가리비2kg(50미이내)",
-      "price": 8900
-    },
-    {
-      "id": 31,
-      "productId": 0,
-      "optionName": "궁채 절임 1kg",
-      "price": 6900
-    },
-    {
-      "id": 32,
-      "productId": 0,
-      "optionName": "양념 깻잎 1kg",
-      "price": 8900
-    },
-    {
-      "id": 33,
-      "productId": 0,
-      "optionName": "된장 깻잎 1kg",
-      "price": 8900
-    },
-    {
-      "id": 34,
-      "productId": 0,
-      "optionName": "간장 깻잎 1kg",
-      "price": 7900
-    },
-    {
-      "id": 35,
-      "productId": 0,
-      "optionName": "고추 무침 1kg",
-      "price": 8900
-    },
-    {
-      "id": 36,
-      "productId": 0,
-      "optionName": "파래 무침 1kg",
-      "price": 9900
-    },
-    {
-      "id": 37,
-      "productId": 0,
-      "optionName": "01_순수소프트 27m 30롤 2팩",
-      "price": 28900
-    },
-    {
-      "id": 38,
-      "productId": 0,
-      "optionName": "02_벚꽃 프리미엄 27m 30롤 2팩",
-      "price": 32900
-    },
-    {
-      "id": 39,
-      "productId": 0,
-      "optionName": "(증정) 초미세모 칫솔 12개 x 2개",
-      "price": 11900
-    },
-    {
-      "id": 40,
-      "productId": 0,
-      "optionName": "(증정) 잇몸케어 치약 100G 3개 x 2개",
-      "price": 16900
-    },
-    {
-      "id": 41,
-      "productId": 0,
-      "optionName": "(증정) 구취케어 치약 100G 3개 x 2개",
-      "price": 16900
-    },
-    {
-      "id": 42,
-      "productId": 0,
-      "optionName": "(증정)화이트케어 치약 100G 3개 x 2개",
-      "price": 19900
-    },
-    {
-      "id": 43,
-      "productId": 0,
-      "optionName": "(증정) 어린이 칫솔 12EA",
-      "price": 9900
-    },
-    {
-      "id": 44,
-      "productId": 0,
-      "optionName": "[가정용] 샤인머스켓 1kg 2수내외",
-      "price": 9900
-    },
-    {
-      "id": 45,
-      "productId": 0,
-      "optionName": "[특품] 샤인머스켓 1kg 1-2수",
-      "price": 12900
-    },
-    {
-      "id": 46,
-      "productId": 0,
-      "optionName": "[특품] 샤인머스켓 2kg 2-3수",
-      "price": 23900
-    },
-    {
-      "id": 47,
-      "productId": 0,
-      "optionName": "화이트",
-      "price": 148000
-    },
-    {
-      "id": 48,
-      "productId": 0,
-      "optionName": "블랙",
-      "price": 148000
-    }
-  ],
+  "response": {
+    "options": [
+      {
+        "id": 1,
+        "productId": 0,
+        "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+        "price": 10000
+      },
+      {
+        "id": 2,
+        "productId": 0,
+        "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
+        "price": 10900
+      },
+      {
+        "id": 3,
+        "productId": 0,
+        "optionName": "고무장갑 베이지 S(소형) 6팩",
+        "price": 9900
+      },
+      {
+        "id": 4,
+        "productId": 0,
+        "optionName": "뽑아쓰는 키친타올 130매 12팩",
+        "price": 16900
+      },
+      {
+        "id": 5,
+        "productId": 0,
+        "optionName": "2겹 식빵수세미 6매",
+        "price": 8900
+      },
+      {
+        "id": 6,
+        "productId": 0,
+        "optionName": "22년산 햇단밤 700g(한정판매)",
+        "price": 9900
+      },
+      {
+        "id": 7,
+        "productId": 0,
+        "optionName": "22년산 햇단밤 1kg(한정판매)",
+        "price": 14500
+      },
+      {
+        "id": 8,
+        "productId": 0,
+        "optionName": "밤깎기+다회용 구이판 세트",
+        "price": 5500
+      },
+      {
+        "id": 9,
+        "productId": 0,
+        "optionName": "JR310 (유선 전용) - 블루",
+        "price": 29900
+      },
+      {
+        "id": 10,
+        "productId": 0,
+        "optionName": "JR310BT (무선 전용) - 레드",
+        "price": 49900
+      },
+      {
+        "id": 11,
+        "productId": 0,
+        "optionName": "JR310BT (무선 전용) - 그린",
+        "price": 49900
+      },
+      {
+        "id": 12,
+        "productId": 0,
+        "optionName": "JR310BT (무선 전용) - 블루",
+        "price": 49900
+      },
+      {
+        "id": 13,
+        "productId": 0,
+        "optionName": "T510BT (무선 전용) - 블랙",
+        "price": 52900
+      },
+      {
+        "id": 14,
+        "productId": 0,
+        "optionName": "T510BT (무선 전용) - 화이트",
+        "price": 52900
+      },
+      {
+        "id": 15,
+        "productId": 0,
+        "optionName": "선택01_바른곡물효소 누룽지맛 2박스",
+        "price": 17900
+      },
+      {
+        "id": 16,
+        "productId": 0,
+        "optionName": "선택02_바른곡물효소누룽지맛 6박스",
+        "price": 50000
+      },
+      {
+        "id": 17,
+        "productId": 0,
+        "optionName": "선택03_바른곡물효소3박스+유산균효소3박스",
+        "price": 50000
+      },
+      {
+        "id": 18,
+        "productId": 0,
+        "optionName": "선택04_바른곡물효소3박스+19종유산균3박스",
+        "price": 50000
+      },
+      {
+        "id": 19,
+        "productId": 0,
+        "optionName": "01. 말랑컷팅장족 100g",
+        "price": 4900
+      },
+      {
+        "id": 20,
+        "productId": 0,
+        "optionName": "02. 말랑컷팅장족 300g",
+        "price": 12800
+      },
+      {
+        "id": 21,
+        "productId": 0,
+        "optionName": "03. 눌린장족 100g",
+        "price": 4900
+      },
+      {
+        "id": 22,
+        "productId": 0,
+        "optionName": "굳지않는 쑥 앙금 절편 1050g",
+        "price": 15900
+      },
+      {
+        "id": 23,
+        "productId": 0,
+        "optionName": "굳지않는 흑미 앙금 절편 1050g",
+        "price": 15900
+      },
+      {
+        "id": 24,
+        "productId": 0,
+        "optionName": "굳지않는 흰 가래떡 1050g",
+        "price": 15900
+      },
+      {
+        "id": 25,
+        "productId": 0,
+        "optionName": "이너딜리티 1박스",
+        "price": 26800
+      },
+      {
+        "id": 26,
+        "productId": 0,
+        "optionName": "이너딜리티 2박스+사은품 2종",
+        "price": 49800
+      },
+      {
+        "id": 27,
+        "productId": 0,
+        "optionName": "제나벨 PDRN 자생크림 1+1",
+        "price": 25900
+      },
+      {
+        "id": 28,
+        "productId": 0,
+        "optionName": "플레이스테이션 VR2 호라이즌 번들",
+        "price": 839000
+      },
+      {
+        "id": 29,
+        "productId": 0,
+        "optionName": "플레이스테이션 VR2",
+        "price": 797000
+      },
+      {
+        "id": 30,
+        "productId": 0,
+        "optionName": "홍가리비2kg(50미이내)",
+        "price": 8900
+      },
+      {
+        "id": 31,
+        "productId": 0,
+        "optionName": "궁채 절임 1kg",
+        "price": 6900
+      },
+      {
+        "id": 32,
+        "productId": 0,
+        "optionName": "양념 깻잎 1kg",
+        "price": 8900
+      },
+      {
+        "id": 33,
+        "productId": 0,
+        "optionName": "된장 깻잎 1kg",
+        "price": 8900
+      },
+      {
+        "id": 34,
+        "productId": 0,
+        "optionName": "간장 깻잎 1kg",
+        "price": 7900
+      },
+      {
+        "id": 35,
+        "productId": 0,
+        "optionName": "고추 무침 1kg",
+        "price": 8900
+      },
+      {
+        "id": 36,
+        "productId": 0,
+        "optionName": "파래 무침 1kg",
+        "price": 9900
+      },
+      {
+        "id": 37,
+        "productId": 0,
+        "optionName": "01_순수소프트 27m 30롤 2팩",
+        "price": 28900
+      },
+      {
+        "id": 38,
+        "productId": 0,
+        "optionName": "02_벚꽃 프리미엄 27m 30롤 2팩",
+        "price": 32900
+      },
+      {
+        "id": 39,
+        "productId": 0,
+        "optionName": "(증정) 초미세모 칫솔 12개 x 2개",
+        "price": 11900
+      },
+      {
+        "id": 40,
+        "productId": 0,
+        "optionName": "(증정) 잇몸케어 치약 100G 3개 x 2개",
+        "price": 16900
+      },
+      {
+        "id": 41,
+        "productId": 0,
+        "optionName": "(증정) 구취케어 치약 100G 3개 x 2개",
+        "price": 16900
+      },
+      {
+        "id": 42,
+        "productId": 0,
+        "optionName": "(증정)화이트케어 치약 100G 3개 x 2개",
+        "price": 19900
+      },
+      {
+        "id": 43,
+        "productId": 0,
+        "optionName": "(증정) 어린이 칫솔 12EA",
+        "price": 9900
+      },
+      {
+        "id": 44,
+        "productId": 0,
+        "optionName": "[가정용] 샤인머스켓 1kg 2수내외",
+        "price": 9900
+      },
+      {
+        "id": 45,
+        "productId": 0,
+        "optionName": "[특품] 샤인머스켓 1kg 1-2수",
+        "price": 12900
+      },
+      {
+        "id": 46,
+        "productId": 0,
+        "optionName": "[특품] 샤인머스켓 2kg 2-3수",
+        "price": 23900
+      },
+      {
+        "id": 47,
+        "productId": 0,
+        "optionName": "화이트",
+        "price": 148000
+      },
+      {
+        "id": 48,
+        "productId": 0,
+        "optionName": "블랙",
+        "price": 148000
+      }
+    ]
+  },
   "error": null
 }
 ```
