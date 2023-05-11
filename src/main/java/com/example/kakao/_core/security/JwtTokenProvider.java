@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private static final Long EXP = 30 * 60 * 1000L;
+    private static final Long EXP = 1000L * 60 * 60 * 48; // 48시간 - 테스트 하기 편함.
     public static final String TOKEN_PREFIX = "Bearer "; // 스페이스 필요함
     public static final String HEADER = "Authorization";
     private static final String SECRET = "MySecretKey";
@@ -27,7 +27,7 @@ public class JwtTokenProvider {
         String jwt = JWT.create()
                 .withSubject(user.getEmail())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXP))
-                .withClaim("userId", user.getUserId())
+                .withClaim("id", user.getId())
                 .withClaim("role", roles)
                 .sign(Algorithm.HMAC512(SECRET));
         return TOKEN_PREFIX + jwt;

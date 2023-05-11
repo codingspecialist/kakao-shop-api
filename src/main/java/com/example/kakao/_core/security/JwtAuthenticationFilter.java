@@ -40,13 +40,13 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             log.debug("디버그 : 토큰 있음");
             DecodedJWT decodedJWT = JwtTokenProvider.verify(jwt);
-            int userId = decodedJWT.getClaim("userId").asInt();
+            int id = decodedJWT.getClaim("id").asInt();
             String roles = decodedJWT.getClaim("role").asString();
 
             StringArrayConverter sac = new StringArrayConverter();
             List<String> roleList = sac.convertToEntityAttribute(roles);
 
-            User user = User.builder().userId(userId).roles(roleList).build();
+            User user = User.builder().id(id).roles(roleList).build();
             CustomUserDetails myUserDetails = new CustomUserDetails(user);
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(

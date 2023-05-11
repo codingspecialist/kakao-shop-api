@@ -21,8 +21,8 @@ public class ProductRestController {
      */
     @GetMapping("/products")
     public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int page) {
-        ProductResponse.FindAllDTO findAllDTO = productService.findAll(page);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(findAllDTO);
+        ProductResponse.FindAllDTO responseDTO = productService.findAll(page);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
 
@@ -35,8 +35,8 @@ public class ProductRestController {
      */
     @GetMapping("/products/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
-        ProductResponse.FindByIdDTO findByIdDTO = productService.findById(id);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(findByIdDTO);
+        ProductResponse.FindByIdDTO responseDTO = productService.findById(id);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
 }

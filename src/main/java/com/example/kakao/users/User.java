@@ -14,7 +14,7 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
     private String email; // 인증시 필요한 필드
     private String password;
     private String username;
@@ -23,8 +23,8 @@ public class User{
     private List<String> roles = new ArrayList<>(); // role은 한 개 이상
 
     @Builder
-    public User(int userId, String email, String password, String username, List<String> roles) {
-        this.userId = userId;
+    public User(int id, String email, String password, String username, List<String> roles) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.username = username;

@@ -1,7 +1,11 @@
 package com.example.kakao.options;
 
+import com.example.kakao._core.utils.ApiUtils;
 import com.example.kakao._core.utils.ApiUtils.ApiResult;
+import com.example.kakao.products.ProductResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +15,11 @@ import java.util.List;
 import static com.example.kakao._core.utils.ApiUtils.success;
 import static java.util.stream.Collectors.toList;
 
+@RequiredArgsConstructor
 @RestController
 public class OptionRestController {
 
-    @Autowired
-    private OptionService optionService;
+    private final OptionService optionService;
 
     /**
      * @param id
@@ -24,10 +28,10 @@ public class OptionRestController {
      * 성공 시 Option 리스트 반환
      */
     @GetMapping("/products/{id}/options")
-    public ApiResult<List<OptionDto>> findByProductId(@PathVariable int id) {
-        return success(optionService.findByProductId(id).stream()
-                .map(OptionDto::new)
-                .collect(toList()));
+    public ResponseEntity<?> findByProductId(@PathVariable int id) {
+        OptionResponse.FindByProductIdDTO responseDTO = optionService.findByProductId(id);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        return ResponseEntity.ok(apiResult);
     }
 
     /**
@@ -35,9 +39,9 @@ public class OptionRestController {
      * Option 전체 반환
      */
     @GetMapping("/options")
-    public ApiResult<List<OptionDto>> findAll() {
-        return success(optionService.findAll().stream()
-                .map(OptionDto::new)
-                .collect(toList()));
+    public ResponseEntity<?> findAll() {
+        OptionResponse.FindAllDTO responseDTO = optionService.findAll();
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        return ResponseEntity.ok(apiResult);
     }
 }

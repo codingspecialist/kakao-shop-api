@@ -26,20 +26,20 @@ public class UserService {
     private final UserJPARepository userJPARepository;
 
     @Transactional
-    public UserResponse.JoinOutDTO join(UserRequest.JoinInDTO joinInDTO) {
-        joinInDTO.setPassword(passwordEncoder.encode(joinInDTO.getPassword()));
+    public UserResponse.JoinDTO join(UserRequest.JoinDTO requestDTO) {
+        requestDTO.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         try {
-            User userPS = userJPARepository.save(joinInDTO.toEntity());
-            return new UserResponse.JoinOutDTO(userPS);
+            User userPS = userJPARepository.save(requestDTO.toEntity());
+            return new UserResponse.JoinDTO(userPS);
         }catch (Exception e){
             throw new Exception500(e.getMessage());
         }
     }
 
-    public String login(UserRequest.LoginInDTO loginInDTO) {
+    public String login(UserRequest.LoginDTO requestDTO) {
         try {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                    = new UsernamePasswordAuthenticationToken(loginInDTO.getEmail(), loginInDTO.getPassword());
+                    = new UsernamePasswordAuthenticationToken(requestDTO.getEmail(), requestDTO.getPassword());
             Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
             CustomUserDetails myUserDetails = (CustomUserDetails) authentication.getPrincipal();
             return JwtTokenProvider.create(myUserDetails.getUser());

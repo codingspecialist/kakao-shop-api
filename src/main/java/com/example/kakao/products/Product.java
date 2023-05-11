@@ -12,15 +12,17 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private int id;
     private String productName;
     private String description;
     private String image;
-    private int price;
+    private int price; // 톡딜가
+
+
 
     @Builder
-    public Product(int productId, String productName, String description, String image, int price) {
-        this.productId = productId;
+    public Product(int id, String productName, String description, String image, int price) {
+        this.id = id;
         this.productName = productName;
         this.description = description;
         this.image = image;

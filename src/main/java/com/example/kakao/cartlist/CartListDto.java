@@ -11,7 +11,7 @@ public class CartListDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
     public static class Request {
-        private int cartListId;
+        private int id;
         private int cartId;
         private int optionId;
         private int quantity;
@@ -19,7 +19,7 @@ public class CartListDto {
 
         public CartList toEntity() {
             CartList cartList = CartList.builder()
-                    .cartListId(cartListId)
+                    .id(id)
                     .cartId(cartId)
                     .optionId(optionId)
                     .quantity(quantity)
@@ -34,7 +34,7 @@ public class CartListDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class Response {
-        private int cartListId;
+        private int id;
 
         private int cartId;
         private int optionId;
@@ -44,7 +44,7 @@ public class CartListDto {
         private String optionName;
 
         public Response(CartList cartList) {
-            this.cartListId = cartList.getCartListId();
+            this.id = cartList.getId();
             this.cartId = cartList.getCartId();
             this.optionId = cartList.getOptionId();
             this.quantity = cartList.getQuantity();
@@ -53,7 +53,7 @@ public class CartListDto {
 
 
         public Response(Response response) {
-            this.cartListId = response.getCartListId();
+            this.id = response.getId();
             this.cartId = response.getCartId();
             this.optionId = response.getOptionId();
             this.quantity = response.getQuantity();

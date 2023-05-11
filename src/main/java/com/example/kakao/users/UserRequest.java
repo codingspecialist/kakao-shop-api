@@ -10,7 +10,7 @@ public class UserRequest {
 
     @Getter
     @Setter
-    public static class JoinInDTO {
+    public static class JoinDTO {
         private String email;
         private String password;
         private String username;
@@ -27,7 +27,7 @@ public class UserRequest {
 
     @Getter
     @Setter
-    public static class LoginInDTO {
+    public static class LoginDTO {
         private String email;
         private String password;
     }

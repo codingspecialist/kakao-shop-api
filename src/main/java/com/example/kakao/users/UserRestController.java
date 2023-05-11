@@ -17,15 +17,15 @@ public class UserRestController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinInDTO joinInDTO) {
-        UserResponse.JoinOutDTO joinOutDTO = userService.join(joinInDTO);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(joinOutDTO);
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO requestDTO) {
+        UserResponse.JoinDTO responseDTO = userService.join(requestDTO);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest.LoginInDTO loginInDTO) {
-        String jwt = userService.login(loginInDTO);
+    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO requestDTO) {
+        String jwt = userService.login(requestDTO);
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
         return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt).body(apiResult);
     }
