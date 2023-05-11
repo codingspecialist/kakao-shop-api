@@ -6,7 +6,6 @@ import com.example.kakao.products.Product;
 import com.example.kakao.products.ProductJPARepository;
 import com.example.kakao.users.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,14 +22,14 @@ public class OrderListService {
 
     public List<OrderList> saveOrderList(List<OrderListDto.Request> orderListDTOs, User user) {
         Order order = new Order();
-        order.setUserId(user.getUserId());
+        order.setUserId(user.getId());
 
         Order newOrder = orderJPARepository.save(order);
 
         List<OrderList> newOrderLists = new ArrayList<>();
 
         for(OrderListDto.Request orderListDTO : orderListDTOs) {
-            orderListDTO.setOrderId(newOrder.getOrderId());
+            orderListDTO.setOrderId(newOrder.getId());
             OrderList newOrderList = orderListDTO.toEntity();
             newOrderLists.add(newOrderList);
         }
@@ -44,8 +43,8 @@ public class OrderListService {
 
         for(OrderList orderList : orderLists) {
             OrderListDto.Response response = new OrderListDto.Response(orderList);
-            Option option = optionJPARepository.findByOptionId(orderList.getOptionId()).get();
-            Product product = productJPARepository.findByProductId(option.getProductId()).get();
+            Option option = optionJPARepository.findById(orderList.getOptionId()).get();
+            Product product = productJPARepository.findById(option.getProduct().getId()).get();
             response.setProductName(product.getProductName());
             response.setOptionName(option.getOptionName());
 

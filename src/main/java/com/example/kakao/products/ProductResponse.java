@@ -20,14 +20,14 @@ public class ProductResponse {
 
         @Getter @Setter
         public class ProductDTO {
-            private int productId;
+            private int id;
             private String productName;
             private String description;
             private String image;
             private int price;
 
             public ProductDTO(Product product) {
-                this.productId = product.getProductId();
+                this.id = product.getId();
                 this.productName = product.getProductName();
                 this.description = product.getDescription();
                 this.image = product.getImage();
@@ -40,14 +40,14 @@ public class ProductResponse {
     @Getter @Setter
     public static class FindByIdDTO {
 
-        private int productId;
+        private int id;
         private String productName;
         private String description;
         private String image;
         private int price;
 
         public FindByIdDTO(Product product) {
-            this.productId = product.getProductId();
+            this.id = product.getId();
             this.productName = product.getProductName();
             this.description = product.getDescription();
             this.image = product.getImage();

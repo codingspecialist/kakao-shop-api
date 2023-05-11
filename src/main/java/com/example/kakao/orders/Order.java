@@ -13,12 +13,12 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private int id;
     private int userId;
 
     @Builder
-    public Order(int orderId, int userId) {
-        this.orderId = orderId;
+    public Order(int id, int userId) {
+        this.id = id;
         this.userId = userId;
     }
 }

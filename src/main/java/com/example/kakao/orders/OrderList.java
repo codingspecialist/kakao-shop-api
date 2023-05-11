@@ -12,15 +12,15 @@ public class OrderList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderListId;
+    private int id;
     private int optionId;
     private int quantity;
     private int price;
     private int orderId;
 
     @Builder
-    public OrderList(int orderListId, int optionId, int quantity, int price, int orderId) {
-        this.orderListId = orderListId;
+    public OrderList(int id, int optionId, int quantity, int price, int orderId) {
+        this.id = id;
         this.optionId = optionId;
         this.quantity = quantity;
         this.price = price;

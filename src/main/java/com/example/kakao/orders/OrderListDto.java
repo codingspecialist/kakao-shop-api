@@ -11,7 +11,7 @@ public class OrderListDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
     public static class Request {
-        private int orderListId;
+        private int id;
         private int optionId;
         private int quantity;
         private int price;
@@ -20,7 +20,7 @@ public class OrderListDto {
 
         public OrderList toEntity() {
             return OrderList.builder()
-                    .orderListId(orderListId)
+                    .id(id)
                     .optionId(optionId)
                     .quantity(quantity)
                     .price(price)
@@ -34,7 +34,7 @@ public class OrderListDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Response {
-        private int orderListId;
+        private int id;
         private int optionId;
         private int quantity;
         private int price;
@@ -44,7 +44,7 @@ public class OrderListDto {
         private String optionName;
 
         public Response(OrderList orderList) {
-            this.orderListId = orderList.getOrderListId();
+            this.id = orderList.getId();
             this.optionId = orderList.getOptionId();
             this.quantity = orderList.getQuantity();
             this.price = orderList.getPrice();
@@ -53,7 +53,7 @@ public class OrderListDto {
 
 
         public Response(OrderListDto.Response response) {
-            this.orderListId = response.getOrderListId();
+            this.id = response.getId();
             this.optionId = response.getOptionId();
             this.quantity = response.getQuantity();
             this.price = response.getPrice();

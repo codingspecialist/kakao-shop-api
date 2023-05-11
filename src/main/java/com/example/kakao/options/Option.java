@@ -1,5 +1,6 @@
 package com.example.kakao.options;
 
+import com.example.kakao.products.Product;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,15 +13,16 @@ public class Option {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int optionId;
-    private int productId;
+    private int id;
+    @ManyToOne
+    private Product product;
     private String optionName;
     private int price;
 
     @Builder
-    public Option(int optionId, int productId, String optionName, int price) {
-        this.optionId = optionId;
-        this.productId = productId;
+    public Option(int id, Product product, String optionName, int price) {
+        this.id = id;
+        this.product = product;
         this.optionName = optionName;
         this.price = price;
     }

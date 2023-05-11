@@ -5,23 +5,20 @@ import com.example.kakao.options.OptionJPARepository;
 import com.example.kakao.products.Product;
 import com.example.kakao.products.ProductJPARepository;
 import com.example.kakao.users.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class CartListService {
 
-    @Autowired
-    CartListJPARepository cartListJPARepository;
-
-    @Autowired
-    OptionJPARepository optionJPARepository;
-
-    @Autowired
-    ProductJPARepository productJPARepository;
+    private final CartListJPARepository cartListJPARepository;
+    private final OptionJPARepository optionJPARepository;
+    private final ProductJPARepository productJPARepository;
 
     /**
      * @param cartListDTOs
@@ -33,7 +30,7 @@ public class CartListService {
         List<CartList> newCartLists = new ArrayList<>();
 
         for(CartListDto.Request cartListDTO : cartListDTOs) {
-            cartListDTO.setCartId(user.getUserId());
+            cartListDTO.setCartId(user.getId());
             CartList newCartList = cartListDTO.toEntity();
             newCartLists.add(newCartList);
         }
@@ -45,7 +42,7 @@ public class CartListService {
         List<CartList> updateCartLists = new ArrayList<>();
 
         for(CartListDto.Request cartListDTO : cartListDTOs) {
-            cartListDTO.setCartId(user.getUserId());
+            cartListDTO.setCartId(user.getId());
             CartList newCartList = cartListDTO.toEntity();
             updateCartLists.add(newCartList);
         }
@@ -54,14 +51,14 @@ public class CartListService {
     }
 
     public List<CartListDto.Response> findAll(User user) {
-        List<CartList> cartLists = cartListJPARepository.findByCartIdOrderByOptionIdAsc(user.getUserId());
+        List<CartList> cartLists = cartListJPARepository.findByCartIdOrderByOptionIdAsc(user.getId());
         List<CartListDto.Response> cartListDTOs = new ArrayList<>();
 
         for(CartList cartList : cartLists) {
             CartListDto.Response response = new CartListDto.Response(cartList);
 
-            Option option = optionJPARepository.findByOptionId(cartList.getOptionId()).get();
-            Product product = productJPARepository.findByProductId(option.getProductId()).get();
+            Option option = optionJPARepository.findById(cartList.getOptionId()).get();
+            Product product = productJPARepository.findById(option.getProduct().getId()).get();
             response.setProductName(product.getProductName());
             response.setOptionName(option.getOptionName());
 
@@ -72,6 +69,6 @@ public class CartListService {
     }
 
     public void clear(User user) {
-        cartListJPARepository.deleteByCartId(user.getUserId());
+        cartListJPARepository.deleteByCartId(user.getId());
     }
 }

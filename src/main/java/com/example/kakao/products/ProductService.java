@@ -18,9 +18,9 @@ public class ProductService {
 
     private final ProductJPARepository productRepository;
 
-    public ProductResponse.FindByIdDTO findById(int productId) {
-        Product productPS = productRepository.findByProductId(productId).orElseThrow(
-                () -> new Exception404("해당 상품을 찾을 수 없습니다 : "+productId)
+    public ProductResponse.FindByIdDTO findById(int id) {
+        Product productPS = productRepository.findById(id).orElseThrow(
+                () -> new Exception404("해당 상품을 찾을 수 없습니다 : "+id)
         );
         return new ProductResponse.FindByIdDTO(productPS);
     }
