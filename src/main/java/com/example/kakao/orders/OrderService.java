@@ -1,5 +1,6 @@
 package com.example.kakao.orders;
 
+import com.example.kakao._core.errors.exception.Exception400;
 import com.example.kakao.options.Option;
 import com.example.kakao.options.OptionJPARepository;
 import com.example.kakao.orders.item.Item;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -27,12 +30,21 @@ public class OrderService {
 
     @Transactional
     public OrderResponse.SaveDTO saveOrder(List<ItemRequest.SaveItemDTO> requestDTOs, User user) {
+        // 주문 생성
         Order order = new Order();
         order.setUser(user);
         Order orderPS = orderJPARepository.save(order);
 
-        List<Item> itemList = new ArrayList<>();
+        // 동일한 옵션이 들어오면 예외처리
+        Set<Integer> optionIds = new HashSet<>();
+        for (ItemRequest.SaveItemDTO item : requestDTOs) {
+            if (!optionIds.add(item.getOptionId())) {
+                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + item.getOptionId());
+            }
+        }
 
+        // 아이템 리스트 DB 저장
+        List<Item> itemList = new ArrayList<>();
         for(ItemRequest.SaveItemDTO requestDTO : requestDTOs) {
             Option optionPS = optionJPARepository.findById(requestDTO.getOptionId()).get();
             Item item = requestDTO.toEntity(optionPS, orderPS);

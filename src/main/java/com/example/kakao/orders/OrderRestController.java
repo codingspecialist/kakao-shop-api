@@ -20,11 +20,11 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class OrderRestController {
 
-    private final OrderService orderListService;
+    private final OrderService orderService;
 
     @PostMapping("/orders/save")
     public ResponseEntity<?> saveOrder(@RequestBody List<ItemRequest.SaveItemDTO> requestDTO, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        OrderResponse.SaveDTO responseDTO = orderListService.saveOrder(requestDTO, userDetails.getUser());
+        OrderResponse.SaveDTO responseDTO = orderService.saveOrder(requestDTO, userDetails.getUser());
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
@@ -32,17 +32,17 @@ public class OrderRestController {
     /*
         현재(23년 1월 3일) 기준 주문 내역을 관리하지 않고 일회성으로 날리기 때문에
         매 주문마다 주문 내역은 1개만 존재하므로,
-        주문내역을 orderId로 불러오지 않고 findAll로 진행합니다.
+        주문내역을 orderId로 불러오지 않고 findAll(userId)로 진행합니다.
      */
     @GetMapping("/orders/{id}")
     public ApiResult<List<ItemRequest.Response>> findAll(@PathVariable int id) {
-        return success(orderListService.findAll(id).stream()
+        return success(orderService.findAll(id).stream()
                 .map(ItemRequest.Response::new)
                 .collect(toList()));
     }
 
     @PostMapping("/orders/clear")
     public void clear() {
-        orderListService.clear();
+        orderService.clear();
     }
 }

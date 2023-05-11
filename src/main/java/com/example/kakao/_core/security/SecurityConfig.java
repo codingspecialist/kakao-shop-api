@@ -80,7 +80,7 @@ public class SecurityConfig {
 
         // 11. 인증, 권한 필터 설정
         http.authorizeRequests(
-                authorize -> authorize.antMatchers("/cart/**", "/products/**", "/options/**", "/order/**").authenticated()
+                authorize -> authorize.antMatchers("/cart/**", "/products/**", "/options/**", "/orders/**").authenticated()
                         .anyRequest().permitAll()
         );
 
