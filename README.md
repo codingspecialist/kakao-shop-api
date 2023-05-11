@@ -668,44 +668,31 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 - 변경 버전
 ```json
 {
-    "success": true,
-    "response": {
-        "id": 9,
-        "user": {
-            "id": 2
-        },
-        "products": [
-            {
-                "id": 1,
-                "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
-                "description": "",
-                "image": "/images/1.jpg",
-                "items": [
-                    {
-                        "id": 17,
-                        "option": {
-                            "id": 1,
-                            "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
-                            "price": 10000
-                        },
-                        "quantity": 5,
-                        "price": 50000
-                    },
-                    {
-                        "id": 18,
-                        "option": {
-                            "id": 2,
-                            "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
-                            "price": 10900
-                        },
-                        "quantity": 5,
-                        "price": 54500
-                    }
-                ]
-            }
-        ],
-        "totalPrice": 104500
-    },
-    "error": null
+  "success": true,
+  "response": {
+    "id": 16,
+    "products": [
+      {
+        "id": 1,
+        "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+        "items": [
+          {
+            "id": 29,
+            "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+            "quantity": 5,
+            "price": 50000
+          },
+          {
+            "id": 30,
+            "optionName": "2겹 식빵수세미 6매",
+            "quantity": 5,
+            "price": 44500
+          }
+        ]
+      }
+    ],
+    "totalPrice": 94500
+  },
+  "error": null
 }
 ```
