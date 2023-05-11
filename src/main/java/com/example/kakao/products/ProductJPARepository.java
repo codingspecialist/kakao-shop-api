@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProductJPARepository extends JpaRepository<Product, Integer> {
-
+    
 }

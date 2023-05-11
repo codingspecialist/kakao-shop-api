@@ -77,4 +77,12 @@ CREATE TABLE `order_list_tb` (
                                  CONSTRAINT `order_list_option_id` FOREIGN KEY (`option_id`) REFERENCES `option_tb` (`id`),
                                  KEY `order_list_order_id_idx` (`order_id`),
                                  CONSTRAINT `order_list_order_id` FOREIGN KEY (`order_id`) REFERENCES `order_tb` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DROP TABLE IF EXISTS `delivery_fee_tb`;
+CREATE TABLE `delivery_fee_tb` (
+                                   `id` int(11) NOT NULL AUTO_INCREMENT,
+                                   `region` varchar(50) NOT NULL,
+                                   `fee` int(11) NOT NULL,
+                                   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

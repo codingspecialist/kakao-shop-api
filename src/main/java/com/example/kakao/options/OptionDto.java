@@ -9,7 +9,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionDto {
-    private int optionId;
+    private int id;
     private int productId;
     private String optionName;
     private int price;

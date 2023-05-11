@@ -18,6 +18,8 @@ public class Product {
     private String image;
     private int price;
 
+
+
     @Builder
     public Product(int id, String productName, String description, String image, int price) {
         this.id = id;

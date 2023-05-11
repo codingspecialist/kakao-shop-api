@@ -3,6 +3,10 @@ use `kakao`;
 INSERT INTO user_tb (`id`,`email`,`password`,`username`, `roles`) VALUES ('1', 'admin@nate.com', '{bcrypt}$2a$10$XqKYFkLAkj5o3995.r1Js.pCZsifZx6Nxwi1lqHxJqhIxvte6ngBq', 'admin', 'ROLE_ADMIN');
 INSERT INTO user_tb (`id`,`email`,`password`,`username`, `roles`) VALUES ('2', 'ssar@nate.com', '{bcrypt}$2a$10$XqKYFkLAkj5o3995.r1Js.pCZsifZx6Nxwi1lqHxJqhIxvte6ngBq', 'ssar', 'ROLE_USER');
 
+INSERT INTO delivery_fee_tb (`id`,`region`, `fee`) VALUES (1, '전국', 0);
+INSERT INTO delivery_fee_tb (`id`,`region`, `fee`) VALUES (2, '제주', 3000);
+INSERT INTO delivery_fee_tb (`id`,`region`, `fee`) VALUES (3, '산간', 6000);
+
 INSERT INTO product_tb (`id`,`product_name`,`description`,`image`, `price`) VALUES ('1', '기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전', '', '/images/1.jpg', '1000');
 INSERT INTO product_tb (`id`,`product_name`,`description`,`image`, `price`) VALUES ('2', '[황금약단밤 골드]2022년산 햇밤 칼집밤700g외/군밤용/생율', '', '/images/2.jpg', '2000');
 INSERT INTO product_tb (`id`,`product_name`,`description`,`image`, `price`) VALUES ('3', '삼성전자 JBL JR310 외 어린이용/성인용 헤드셋 3종!', '', '/images/3.jpg', '30000');
