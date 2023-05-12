@@ -27,7 +27,10 @@ public class OptionResponse {
             private int price;
 
             public OptionDTO(Option option) {
-                copyProperties(option, this);
+                this.id = option.getId();
+                this.productId = option.getProduct().getId();
+                this.optionName = option.getOptionName();
+                this.price = option.getPrice();
             }
         }
     }
@@ -49,7 +52,10 @@ public class OptionResponse {
             private int price;
 
             public OptionDTO(Option option) {
-                copyProperties(option, this);
+                this.id = option.getId();
+                this.productId = option.getProduct().getId();
+                this.optionName = option.getOptionName();
+                this.price = option.getPrice();
             }
         }
     }
