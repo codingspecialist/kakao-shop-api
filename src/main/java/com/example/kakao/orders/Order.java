@@ -1,5 +1,6 @@
 package com.example.kakao.orders;
 
+import com.example.kakao.users.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,11 +15,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int userId;
+
+    @ManyToOne
+    private User user;
 
     @Builder
-    public Order(int id, int userId) {
+    public Order(int id, User user) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
     }
 }

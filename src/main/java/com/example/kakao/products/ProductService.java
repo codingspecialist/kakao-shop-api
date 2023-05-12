@@ -5,7 +5,6 @@ import com.example.kakao.delivery.DeliveryFee;
 import com.example.kakao.delivery.DeliveryFeeJPARepository;
 import com.example.kakao.options.Option;
 import com.example.kakao.options.OptionJPARepository;
-import com.example.kakao.users.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor

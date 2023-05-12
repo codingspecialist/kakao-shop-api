@@ -579,3 +579,120 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
   "error": null
 }
 ```
+
+### 8. 주문하기
+- method : post
+- url : http://localhost:8080/orders/save
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body : 
+```json
+[
+    {
+      "optionId":1,
+      "quantity":5
+    },
+    {
+      "optionId":2,
+      "quantity":5
+    }
+]
+```
+- response body :
+- 이전 버전
+```json
+[
+  {
+    "id": 1,
+    "option": {
+      "id": 1,
+      "product": {
+        "id": 1,
+        "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+        "description": "",
+        "image": "/images/1.jpg",
+        "price": 1000
+      },
+      "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+      "price": 10000
+    },
+    "order": {
+      "id": 1,
+      "user": {
+        "id": 2,
+        "email": null,
+        "password": null,
+        "username": null,
+        "roles": [
+          "ROLE_USER"
+        ]
+      }
+    },
+    "quantity": 5,
+    "price": 0
+  },
+  {
+    "id": 2,
+    "option": {
+      "id": 2,
+      "product": {
+        "id": 1,
+        "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+        "description": "",
+        "image": "/images/1.jpg",
+        "price": 1000
+      },
+      "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
+      "price": 10900
+    },
+    "order": {
+      "id": 1,
+      "user": {
+        "id": 2,
+        "email": null,
+        "password": null,
+        "username": null,
+        "roles": [
+          "ROLE_USER"
+        ]
+      }
+    },
+    "quantity": 5,
+    "price": 0
+  }
+]
+```
+
+- 변경 버전
+```json
+{
+  "success": true,
+  "response": {
+    "id": 16,
+    "products": [
+      {
+        "id": 1,
+        "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
+        "items": [
+          {
+            "id": 29,
+            "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+            "quantity": 5,
+            "price": 50000
+          },
+          {
+            "id": 30,
+            "optionName": "2겹 식빵수세미 6매",
+            "quantity": 5,
+            "price": 44500
+          }
+        ]
+      }
+    ],
+    "totalPrice": 94500
+  },
+  "error": null
+}
+```

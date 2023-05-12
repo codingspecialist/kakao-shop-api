@@ -16,7 +16,7 @@ public class Product {
     private String productName;
     private String description;
     private String image;
-    private int price;
+    private int price; // 톡딜가
 
 
 

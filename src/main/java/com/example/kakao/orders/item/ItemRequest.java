@@ -1,30 +1,31 @@
-package com.example.kakao.orders;
+package com.example.kakao.orders.item;
 
+import com.example.kakao.options.Option;
+import com.example.kakao.orders.Order;
 import lombok.*;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderListDto {
+public class ItemRequest {
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
-    public static class Request {
+    public static class SaveItemDTO {
         private int id;
         private int optionId;
+        private int orderId;
         private int quantity;
         private int price;
 
-        private int orderId;
-
-        public OrderList toEntity() {
-            return OrderList.builder()
+        public Item toEntity(Option option, Order order) {
+            return Item.builder()
                     .id(id)
-                    .optionId(optionId)
+                    .option(option)
+                    .order(order)
                     .quantity(quantity)
                     .price(price)
-                    .orderId(orderId)
                     .build();
         }
     }
@@ -36,23 +37,23 @@ public class OrderListDto {
     public static class Response {
         private int id;
         private int optionId;
+        private int orderId;
         private int quantity;
         private int price;
 
-        private int orderId;
         private String productName;
         private String optionName;
 
-        public Response(OrderList orderList) {
-            this.id = orderList.getId();
-            this.optionId = orderList.getOptionId();
-            this.quantity = orderList.getQuantity();
-            this.price = orderList.getPrice();
-            this.orderId = orderList.getOrderId();
+        public Response(Item item) {
+            this.id = item.getId();
+            this.optionId = item.getOption().getId();
+            this.quantity = item.getQuantity();
+            this.price = item.getPrice();
+            this.orderId = item.getOrder().getId();
         }
 
 
-        public Response(OrderListDto.Response response) {
+        public Response(ItemRequest.Response response) {
             this.id = response.getId();
             this.optionId = response.getOptionId();
             this.quantity = response.getQuantity();

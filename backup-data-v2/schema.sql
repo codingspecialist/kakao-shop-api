@@ -65,18 +65,18 @@ CREATE TABLE `order_tb` (
 
 
 
-DROP TABLE IF EXISTS `order_list_tb`;
-CREATE TABLE `order_list_tb` (
+DROP TABLE IF EXISTS `item_tb`;
+CREATE TABLE `item_tb` (
                                  `id` int(11) NOT NULL AUTO_INCREMENT,
                                  `option_id` int(11) NOT NULL,
                                  `quantity` int(11) NOT NULL,
                                  `price` int(11) NOT NULL,
                                  `order_id` int(11) NOT NULL,
                                  PRIMARY KEY (`id`),
-                                 KEY `order_list_option_id_idx` (`option_id`),
-                                 CONSTRAINT `order_list_option_id` FOREIGN KEY (`option_id`) REFERENCES `option_tb` (`id`),
-                                 KEY `order_list_order_id_idx` (`order_id`),
-                                 CONSTRAINT `order_list_order_id` FOREIGN KEY (`order_id`) REFERENCES `order_tb` (`id`)
+                                 KEY `item_option_id_idx` (`option_id`),
+                                 CONSTRAINT `item_option_id` FOREIGN KEY (`option_id`) REFERENCES `option_tb` (`id`),
+                                 KEY `item_order_id_idx` (`order_id`),
+                                 CONSTRAINT `item_order_id` FOREIGN KEY (`order_id`) REFERENCES `order_tb` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS `delivery_fee_tb`;
