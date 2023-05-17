@@ -1,25 +1,33 @@
 package com.example.kakao.options;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 @Service
 public class OptionService {
 
-    @Autowired
-    private OptionJPARepository optionRepository;
+    private final OptionJPARepository optionRepository;
 
-    public List<Option> findByProductId(int productId) {
-        return optionRepository.findByProductId(productId);
+    public List<OptionResponse.FindByProductIdDTO> findByProductId(int id) {
+        List<Option> optionList = optionRepository.findByProductId(id);
+        List<OptionResponse.FindByProductIdDTO> responseDTO = optionList.stream().map(OptionResponse.FindByProductIdDTO::new).collect(Collectors.toList());
+        return responseDTO;
     }
 
-    public List<Option> findAll() {
-        return optionRepository.findAll();
+    public List<OptionResponse.FindAllDTO> findAll() {
+        List<Option> optionList = optionRepository.findAll();
+        List<OptionResponse.FindAllDTO> responseDTO = optionList.stream().map(OptionResponse.FindAllDTO::new).collect(Collectors.toList());
+        return responseDTO;
     }
 
     public String findOptionNameByOptionId(int id) {
-        return optionRepository.findByOptionId(id).get().getOptionName();
+        return optionRepository.findById(id).get().getOptionName();
     }
 }

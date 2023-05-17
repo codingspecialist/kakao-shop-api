@@ -1,24 +1,27 @@
 package com.example.kakao.orders;
 
+import com.example.kakao.users.User;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+@Setter // 삭제 예정
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 @Table(name="order_tb")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
-    private int memberId;
+    private int id;
+
+    @ManyToOne
+    private User user;
 
     @Builder
-    public Order (int orderId, int memberId) {
-        this.orderId = orderId;
-        this.memberId = memberId;
+    public Order(int id, User user) {
+        this.id = id;
+        this.user = user;
     }
 }

@@ -1,34 +1,29 @@
 package com.example.kakao.options;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.example.kakao.products.Product;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 @Table(name="option_tb")
 public class Option {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int optionId;
-    private int productId;
+    private int id;
+    @ManyToOne
+    private Product product;
     private String optionName;
     private int price;
 
-    @AllArgsConstructor
-    public static class Builder {
-        private int optionId;
-        private int productId;
-        private String optionName;
-        private int price;
-
-        public Option build() {
-            return new Option(optionId, productId, optionName, price);
-        }
+    @Builder
+    public Option(int id, Product product, String optionName, int price) {
+        this.id = id;
+        this.product = product;
+        this.optionName = optionName;
+        this.price = price;
     }
 }
