@@ -28,16 +28,16 @@ CREATE TABLE `product_tb` (
 
 
 
-DROP TABLE IF EXISTS `cart_list_tb`;
-CREATE TABLE `cart_list_tb` (
+DROP TABLE IF EXISTS `cart_tb`;
+CREATE TABLE `cart_tb` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                                `cart_id` int(11) NOT NULL,
+                                `user_id` int(11) NOT NULL,
                                 `option_id` int(11) NOT NULL,
                                 `quantity` int(11) NOT NULL,
                                 `price` int(11) NOT NULL,
                                 PRIMARY KEY (`id`),
-                                KEY `cart_list_cart_id_idx` (`cart_id`),
-                                KEY `cart_list_option_id_idx` (`option_id`)
+                                KEY `cart_user_id_idx` (`user_id`),
+                                KEY `cart_option_id_idx` (`option_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -77,12 +77,4 @@ CREATE TABLE `item_tb` (
                                  CONSTRAINT `item_option_id` FOREIGN KEY (`option_id`) REFERENCES `option_tb` (`id`),
                                  KEY `item_order_id_idx` (`order_id`),
                                  CONSTRAINT `item_order_id` FOREIGN KEY (`order_id`) REFERENCES `order_tb` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-DROP TABLE IF EXISTS `delivery_fee_tb`;
-CREATE TABLE `delivery_fee_tb` (
-                                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                                   `region` varchar(50) NOT NULL,
-                                   `fee` int(11) NOT NULL,
-                                   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

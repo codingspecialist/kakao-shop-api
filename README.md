@@ -1,6 +1,18 @@
 # KAKAO 쇼핑
 
 ## API 요청
+- 회원가입, 동일 이메일 체크 (완)
+- 로그인 (완)
+- 로그아웃 (프론트에서 처리)
+- 전체 상품 목록 조회 (완)
+- 개별 상품 상세 조회 (완)
+- 상품 옵션 선택, 옵션 확인 및 수량 결정 (프론트에서 처리)
+- 장바구니 담기 (완)
+- 장바구니 보기
+- 장바구니 상품 옵셥 확인 및 수량 결정 (프론트에서 처리)
+- 주문 - (1) 장바구니 업데이트 (완)
+- 결제 - (1) 주문하기(완) (2) 결재하기(생략가능)
+- 주문 결과 확인 (완)
 
 ### 1. 회원가입
 - method : post
@@ -76,7 +88,7 @@ email, roles
 }
 ```
 
-### 4. 상품목록 보기
+### 4. 전체 상품 목록 조회
 - method : get
 - url : http://localhost:8080/products
 - request header :
@@ -156,7 +168,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 5. 상품 한건 보기(상품 + 옵션리스트)
+### 5. 개별 상품 상세 조회(상품 + 옵션리스트)
 - method : get
 - url : http://localhost:8080/products/{id}
 - request header :
@@ -574,7 +586,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 8. 주문하기
+### 8. 주문하기 - 결재하기 버튼 클릭시
 - method : post
 - url : http://localhost:8080/orders/save
 - request header :
@@ -758,4 +770,144 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
   },
   "error": null
 }
+```
+
+### 10. 장바구니 담기
+- method : post
+- url : http://localhost:8080/cart/add
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body : 
+```json
+[
+    {
+
+        "optionId":4,
+        "quantity":22
+    },
+    {
+
+        "optionId":9,
+        "quantity":5
+    }
+]
+```
+- response body :
+```json
+{
+    "success": true,
+    "response": [
+        {
+            "id": 18,
+            "userId": 4,
+            "optionId": 4,
+            "quantity": 22,
+            "price": 371800
+        },
+        {
+            "id": 19,
+            "userId": 4,
+            "optionId": 9,
+            "quantity": 5,
+            "price": 149500
+        }
+    ],
+    "error": null
+}
+```
+
+### 11. 장바구니 조회
+- method : post
+- url : http://localhost:8080/
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body :
+```json
+
+```
+- response body :
+```json
+
+```
+
+### 12. 장바구니 수정
+- method : post
+- url : http://localhost:8080/cart/update
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body :
+```json
+[
+    {
+        "id":18,
+        "optionId":4,
+        "quantity":22
+    },
+    {
+        "id":19,
+        "optionId":9,
+        "quantity":5
+    }
+]
+```
+- response body :
+```json
+{
+    "success": true,
+    "response": [
+        {
+            "id": 18,
+            "userId": 4,
+            "optionId": 4,
+            "quantity": 22,
+            "price": 371800
+        },
+        {
+            "id": 19,
+            "userId": 4,
+            "optionId": 9,
+            "quantity": 5,
+            "price": 149500
+        }
+    ],
+    "error": null
+}
+```
+
+### 13. 장바구니 아이템 삭제
+- method : post
+- url : http://localhost:8080/
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body :
+```json
+
+```
+- response body :
+```json
+
+```
+
+### 14. 주문 취소
+- method : post
+- url : http://localhost:8080/
+- request header :
+```text
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MzczMjY1MiwidXNlcklkIjozfQ.xlQksBtOBczgeuaanYViiqrMTx5jijsRmiaEdlm-AB_ykIerS5vtZIFKPVZrQGhE2ofBS_jQD891vxyOBt4G1g
+```
+- request body :
+```json
+
+```
+- response body :
+```json
+
 ```

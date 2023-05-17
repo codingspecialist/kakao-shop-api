@@ -6,11 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.kakao.users.StringArrayConverter;
-import com.example.kakao.users.User;
+import com.example.kakao.user.StringArrayConverter;
+import com.example.kakao.user.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Date;
 
 

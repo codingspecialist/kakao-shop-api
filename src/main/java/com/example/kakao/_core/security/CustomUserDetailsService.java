@@ -1,8 +1,8 @@
 package com.example.kakao._core.security;
 
 import com.example.kakao._core.errors.exception.Exception401;
-import com.example.kakao.users.User;
-import com.example.kakao.users.UserJPARepository;
+import com.example.kakao.user.User;
+import com.example.kakao.user.UserJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
