@@ -34,11 +34,18 @@ public class OrderRestController {
         매 주문마다 주문 내역은 1개만 존재하므로,
         주문내역을 orderId로 불러오지 않고 findAll(userId)로 진행합니다.
      */
-    @GetMapping("/orders/{id}")
-    public ApiResult<List<ItemRequest.Response>> findAll(@PathVariable int id) {
-        return success(orderService.findAll(id).stream()
+    @GetMapping("/v1/orders/{id}")
+    public ApiResult<List<ItemRequest.Response>> findAllV1(@PathVariable int id) {
+        return success(orderService.findAllV1(id).stream()
                 .map(ItemRequest.Response::new)
                 .collect(toList()));
+    }
+
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<?> findAll(@PathVariable int id) {
+        OrderResponse.FindALLDTO responseDTO = orderService.findAll(id);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        return ResponseEntity.ok(apiResult);
     }
 
     @PostMapping("/orders/clear")

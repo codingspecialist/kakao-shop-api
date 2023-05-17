@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -14,14 +15,16 @@ public class OptionService {
 
     private final OptionJPARepository optionRepository;
 
-    public OptionResponse.FindByProductIdDTO findByProductId(int id) {
+    public List<OptionResponse.FindByProductIdDTO> findByProductId(int id) {
         List<Option> optionList = optionRepository.findByProductId(id);
-        return new OptionResponse.FindByProductIdDTO(optionList);
+        List<OptionResponse.FindByProductIdDTO> responseDTO = optionList.stream().map(OptionResponse.FindByProductIdDTO::new).collect(Collectors.toList());
+        return responseDTO;
     }
 
-    public OptionResponse.FindAllDTO findAll() {
+    public List<OptionResponse.FindAllDTO> findAll() {
         List<Option> optionList = optionRepository.findAll();
-        return new OptionResponse.FindAllDTO(optionList);
+        List<OptionResponse.FindAllDTO> responseDTO = optionList.stream().map(OptionResponse.FindAllDTO::new).collect(Collectors.toList());
+        return responseDTO;
     }
 
     public String findOptionNameByOptionId(int id) {

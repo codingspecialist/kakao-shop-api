@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.kakao.options.BeanUtilsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-11T01:34:38" hostname="DESKTOP-1FFOQKL" time="0.119">
-  <properties/>
-  <testcase name="copyProperties_test()" classname="com.example.kakao.options.BeanUtilsTest" time="0.119"/>
-  <system-out><![CDATA[테스트 : CopyUser{id=1, email='ssar@nate.com', password='1234', username='ssar', roles=[ROLE_USER]}
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

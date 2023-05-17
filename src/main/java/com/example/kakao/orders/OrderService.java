@@ -1,6 +1,7 @@
 package com.example.kakao.orders;
 
 import com.example.kakao._core.errors.exception.Exception400;
+import com.example.kakao._core.errors.exception.Exception404;
 import com.example.kakao.options.Option;
 import com.example.kakao.options.OptionJPARepository;
 import com.example.kakao.orders.item.Item;
@@ -56,7 +57,7 @@ public class OrderService {
         return new OrderResponse.SaveDTO(order,itemListPS);
     }
 
-    public List<ItemRequest.Response> findAll(int id) {
+    public List<ItemRequest.Response> findAllV1(int id) {
         List<Item> itemList = ItemJPARepository.findAllByOrderId(id);//findAll();
         List<ItemRequest.Response> orderListDTOs = new ArrayList<>();
 
@@ -71,6 +72,15 @@ public class OrderService {
         }
 
         return orderListDTOs;
+    }
+
+    public OrderResponse.FindALLDTO findAll(int id) {
+        Order orderPS = orderJPARepository.findById(id).orElseThrow(
+                ()-> new Exception404("해당 주문을 찾을 수 없습니다 : "+id)
+        );
+        List<Item> itemList = ItemJPARepository.findAllByOrderId(id);//findAll();
+
+        return new OrderResponse.FindALLDTO(orderPS, itemList);
     }
 
     public void clear() {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -32,9 +33,10 @@ public class ProductService {
         return new ProductResponse.FindByIdDTO(productPS, optionListPS, deliveryFeeListPS);
     }
 
-    public ProductResponse.FindAllDTO findAll(int page) {
+    public List<ProductResponse.FindAllDTO> findAll(int page) {
         Pageable pageable = PageRequest.of(page,9);
         Page<Product> pageContent = productRepository.findAll(pageable);
-        return new ProductResponse.FindAllDTO(pageContent.getContent());
+        List<ProductResponse.FindAllDTO> responseDTO = pageContent.getContent().stream().map(ProductResponse.FindAllDTO::new).collect(Collectors.toList());
+        return responseDTO;
     }
 }

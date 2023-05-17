@@ -29,7 +29,7 @@ public class OptionRestController {
      */
     @GetMapping("/products/{id}/options")
     public ResponseEntity<?> findByProductId(@PathVariable int id) {
-        OptionResponse.FindByProductIdDTO responseDTO = optionService.findByProductId(id);
+        List<OptionResponse.FindByProductIdDTO> responseDTO = optionService.findByProductId(id);
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
@@ -40,7 +40,7 @@ public class OptionRestController {
      */
     @GetMapping("/options")
     public ResponseEntity<?> findAll() {
-        OptionResponse.FindAllDTO responseDTO = optionService.findAll();
+        List<OptionResponse.FindAllDTO> responseDTO = optionService.findAll();
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }
