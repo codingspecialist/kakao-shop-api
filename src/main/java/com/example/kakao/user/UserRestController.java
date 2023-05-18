@@ -4,10 +4,13 @@ import com.example.kakao._core.security.JwtTokenProvider;
 import com.example.kakao._core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -16,24 +19,32 @@ public class UserRestController {
 
     private final UserService userService;
 
+    // (기능1) 회원가입
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO requestDTO) {
-        UserResponse.JoinDTO responseDTO = userService.join(requestDTO);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
-        return ResponseEntity.ok(apiResult);
+    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO requestDTO, Errors errors) {
+        userService.join(requestDTO);
+        return ResponseEntity.ok(ApiUtils.success(null));
     }
 
+    // (기능2) 로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO requestDTO) {
+    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO requestDTO, Errors errors) {
         String jwt = userService.login(requestDTO);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
-        return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt).body(apiResult);
+        return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt).body(ApiUtils.success(null));
     }
 
+    // 사용 안함 - 프론트 요구사항에 이메일 중복 검사 로직 없음.
     @PostMapping("/check")
     public ResponseEntity<?> check(@RequestBody Map<String, String> user) {
         userService.sameCheckEmail(user.get("email"));
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
-        return ResponseEntity.ok(apiResult);
+        return ResponseEntity.ok(ApiUtils.success(null));
+    }
+
+    // (기능3) - 로그아웃
+    // 사용 안함 - 프론트에서 localStorage JWT 토큰을 삭제하면 됨.
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody Map<String, String> user) {
+        userService.sameCheckEmail(user.get("email"));
+        return ResponseEntity.ok().header(JwtTokenProvider.HEADER, "").body(ApiUtils.success(null));
     }
 }

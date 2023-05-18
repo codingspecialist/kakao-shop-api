@@ -25,11 +25,10 @@ public class UserService {
 
 
     @Transactional
-    public UserResponse.JoinDTO join(UserRequest.JoinDTO requestDTO) {
+    public void join(UserRequest.JoinDTO requestDTO) {
         requestDTO.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         try {
-            User userPS = userJPARepository.save(requestDTO.toEntity());
-            return new UserResponse.JoinDTO(userPS);
+            userJPARepository.save(requestDTO.toEntity());
         }catch (Exception e){
             throw new Exception500(e.getMessage());
         }

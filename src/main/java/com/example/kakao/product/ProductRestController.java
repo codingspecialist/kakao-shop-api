@@ -16,25 +16,15 @@ public class ProductRestController {
 
     private final ProductService productService;
 
-    /**
-     * [판매자&구매자 공통 기능] 전체 상품 조회
-     * @return
-     * 전체 상품 리스트를 반환
-     */
+    // (기능4) 전체 상품 목록 조회
     @GetMapping("/products")
     public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int page) {
-        List<ProductResponse.FindAllDTO> responseDTO = productService.findAll(page);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        List<ProductResponse.FindAllDTO> responseDTOs = productService.findAll(page);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTOs);
         return ResponseEntity.ok(apiResult);
     }
 
-    /**
-     * [판매자&구매자 공통 기능] 단일 상품 조회
-     * @param id // 상품 id
-     * 상품 id를 받아서
-     * @return
-     * 해당 상품 정보를 반환
-     */
+    // (기능5) 개별 상품 상세 조회
     @GetMapping("/products/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
         ProductResponse.FindByIdDTO responseDTO = productService.findById(id);

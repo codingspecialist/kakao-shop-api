@@ -32,7 +32,7 @@ public class ProductService {
     public List<ProductResponse.FindAllDTO> findAll(int page) {
         Pageable pageable = PageRequest.of(page,9);
         Page<Product> pageContent = productRepository.findAll(pageable);
-        List<ProductResponse.FindAllDTO> responseDTO = pageContent.getContent().stream().map(ProductResponse.FindAllDTO::new).collect(Collectors.toList());
-        return responseDTO;
+        List<ProductResponse.FindAllDTO> responseDTOs = pageContent.getContent().stream().map(ProductResponse.FindAllDTO::new).collect(Collectors.toList());
+        return responseDTOs;
     }
 }

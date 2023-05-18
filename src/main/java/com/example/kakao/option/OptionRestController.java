@@ -24,8 +24,8 @@ public class OptionRestController {
      */
     @GetMapping("/products/{id}/options")
     public ResponseEntity<?> findByProductId(@PathVariable int id) {
-        List<OptionResponse.FindByProductIdDTO> responseDTO = optionService.findByProductId(id);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        List<OptionResponse.FindByProductIdDTO> responseDTOs = optionService.findByProductId(id);
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTOs);
         return ResponseEntity.ok(apiResult);
     }
 
@@ -35,8 +35,8 @@ public class OptionRestController {
      */
     @GetMapping("/options")
     public ResponseEntity<?> findAll() {
-        List<OptionResponse.FindAllDTO> responseDTO = optionService.findAll();
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        List<OptionResponse.FindAllDTO> responseDTOs = optionService.findAll();
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTOs);
         return ResponseEntity.ok(apiResult);
     }
 }
