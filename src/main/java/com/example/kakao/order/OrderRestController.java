@@ -30,7 +30,9 @@ public class OrderRestController {
     }
 
     @PostMapping("/orders/clear")
-    public void clear() {
+    public ResponseEntity<?> clear() {
         orderService.clear();
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
+        return ResponseEntity.ok(apiResult);
     }
 }
