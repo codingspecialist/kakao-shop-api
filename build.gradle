@@ -29,21 +29,11 @@ dependencies {
 	// third party
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 	implementation group: 'com.auth0', name: 'java-jwt', version: '4.3.0'
-
-
-
-
-
-
-
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-
-def frontendDir = "$projectDir/frontend"
 
 sourceSets {
 	main {
@@ -53,39 +43,7 @@ sourceSets {
 	}
 }
 
-/*
-processResources {
-	dependsOn "copyReactBuildFiles"
+jar {
+	enabled = false
 }
 
-task installReact(type: Exec) {
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "audit", "fix"
-		commandLine 'npm.cmd', 'install'
-	} else {
-		commandLine "npm", "audit", "fix"
-		commandLine 'npm', 'install'
-	}
-}
-
-task buildReact(type: Exec) {
-	dependsOn "installReact"
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "run-script", "build"
-	} else {
-		commandLine "npm", "run-script", "build"
-	}
-}
-
-task copyReactBuildFiles(type: Copy) {
-	dependsOn "buildReact"
-	from "$frontendDir/build"
-	into "$buildDir/resources/main/static"
-}
-*/

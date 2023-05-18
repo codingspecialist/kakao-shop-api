@@ -16,12 +16,12 @@
 
 ## 남은 일
 - API 요청 컨트롤러 기능 매칭 (완)
-- 유효성 검사
+- 유효성 검사 - UserRequest 유효성 검사 (완)
 - 화면에 따른 DTO 정리
 - 쿼리 튜닝 + open in view 비활성화
 - 테스트 코드 작성
 - RestDoc API 문서 작성
-- AWS 배포
+- AWS 배포 (엘라스틱 빈 스톡 deploy폴더 - jar파일, images폴더)
 
 ### 1. 회원가입
 - method : post
