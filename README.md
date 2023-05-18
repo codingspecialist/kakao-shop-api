@@ -797,24 +797,9 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 - response body :
 ```json
 {
-    "success": true,
-    "response": [
-        {
-            "id": 18,
-            "userId": 4,
-            "optionId": 4,
-            "quantity": 22,
-            "price": 371800
-        },
-        {
-            "id": 19,
-            "userId": 4,
-            "optionId": 9,
-            "quantity": 5,
-            "price": 149500
-        }
-    ],
-    "error": null
+  "success": true,
+  "response": null,
+  "error": null
 }
 ```
 
@@ -859,24 +844,9 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 - response body :
 ```json
 {
-    "success": true,
-    "response": [
-        {
-            "id": 18,
-            "userId": 4,
-            "optionId": 4,
-            "quantity": 22,
-            "price": 371800
-        },
-        {
-            "id": 19,
-            "userId": 4,
-            "optionId": 9,
-            "quantity": 5,
-            "price": 149500
-        }
-    ],
-    "error": null
+  "success": true,
+  "response": null,
+  "error": null
 }
 ```
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 
 public interface CartJPARepository extends JpaRepository<Cart, Integer> {
-    List<Cart> findAllByUserId(int cartId);
+    List<Cart> findAllByUserId(int userId);
 
     List<Cart> findByUserIdOrderByOptionIdAsc(int userId);
 
-    List<Cart> deleteByUserId(int cartId);
+    List<Cart> deleteByUserId(int userId);
 }

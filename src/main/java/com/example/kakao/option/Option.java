@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+// 재고 관리 여부는 없다.
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -14,7 +15,7 @@ public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
     private String optionName;
     private int price;

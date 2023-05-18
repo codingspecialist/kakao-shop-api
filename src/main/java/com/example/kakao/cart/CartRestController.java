@@ -22,25 +22,28 @@ public class CartRestController {
 
     private final CartService cartListService;
 
+    // 장바구니 담기
     @PostMapping("/add")
     public ResponseEntity<?> addCartList(@RequestBody List<CartRequest.SaveDTO> requestDTO, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        List<CartResponse.SaveOrUpdateDTO> responseDTO = cartListService.addCartList(requestDTO, userDetails.getUser());
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        cartListService.addCartList(requestDTO, userDetails.getUser());
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
         return ResponseEntity.ok(apiResult);
     }
 
+    // 주문하기
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody List<CartRequest.UpdateDTO> requestDTO, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        List<CartResponse.SaveOrUpdateDTO> responseDTO = cartListService.update(requestDTO, userDetails.getUser());
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        cartListService.update(requestDTO,userDetails.getUser());
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
         return ResponseEntity.ok(apiResult);
     }
 
+    // 장바구니 조회
     @GetMapping()
-    public ApiResult<List<CartListDto.Response>> findAll(@AuthenticationPrincipal User user) {
-        return success(cartListService.findAll(user).stream()
-                .map(CartListDto.Response::new)
-                .collect(toList()));
+    public ResponseEntity<?> findAll(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        CartResponse.FindAllDTO responseDTO = cartListService.findAll(userDetails.getUser());
+        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
+        return ResponseEntity.ok(apiResult);
     }
 
     @DeleteMapping("/clear")

@@ -4,12 +4,17 @@ import com.example.kakao._core.errors.exception.Exception400;
 import com.example.kakao._core.errors.exception.Exception404;
 import com.example.kakao.option.Option;
 import com.example.kakao.option.OptionJPARepository;
+import com.example.kakao.order.Order;
 import com.example.kakao.order.OrderRequest;
+import com.example.kakao.order.OrderResponse;
+import com.example.kakao.order.item.Item;
 import com.example.kakao.product.Product;
 import com.example.kakao.product.ProductJPARepository;
 import com.example.kakao.product.ProductResponse;
 import com.example.kakao.user.User;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,74 +34,53 @@ public class CartService {
     private final ProductJPARepository productJPARepository;
 
     @Transactional
-    public List<CartResponse.SaveOrUpdateDTO> addCartList(List<CartRequest.SaveDTO> requestDTOs, User user) {
-
-        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
-            // 1. 옵션 존재 확인
-            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
-                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
-            );
-            // 2. 장바구니에 유저 정보 연결 (한명의 유저는 장바구니를 결재 후 폐기함)
-            cartDTO.setUserId(user.getId());
-            // 3. 가격은 프론트로 부터 받지 않는다.
-            return cartDTO.toEntity(optionPS.getPrice() * cartDTO.getQuantity());
-        }).collect(Collectors.toList());
-
+    public void addCartList(List<CartRequest.SaveDTO> requestDTOs, User user) {
         // 동일한 옵션이 들어오면 예외처리
         Set<Integer> optionIds = new HashSet<>();
-        for (CartRequest.SaveDTO item : requestDTOs) {
-            if (!optionIds.add(item.getOptionId())) {
-                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + item.getOptionId());
+        for (CartRequest.SaveDTO cart : requestDTOs) {
+            if (!optionIds.add(cart.getOptionId())) {
+                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + cart.getOptionId());
             }
         }
 
-        cartJPARepository.saveAll(cartList);
+        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
+            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
+                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
+            );
+            return cartDTO.toEntity(optionPS, user);
+        }).collect(Collectors.toList());
 
-        List<CartResponse.SaveOrUpdateDTO> responseDTO = cartList.stream().map(CartResponse.SaveOrUpdateDTO::new).collect(Collectors.toList());
-        return responseDTO;
+        cartJPARepository.saveAll(cartList);
     }
 
     @Transactional
-    public List<CartResponse.SaveOrUpdateDTO> update(List<CartRequest.UpdateDTO> requestDTOs, User user) {
-        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
-            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
-                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
-            );
-            cartDTO.setUserId(user.getId());
-            return cartDTO.toEntity(optionPS.getPrice() * cartDTO.getQuantity());
-        }).collect(Collectors.toList());
-
+    public void update(List<CartRequest.UpdateDTO> requestDTOs, User user) {
         // 동일한 옵션이 들어오면 예외처리
         Set<Integer> optionIds = new HashSet<>();
-        for (CartRequest.UpdateDTO item : requestDTOs) {
-            if (!optionIds.add(item.getOptionId())) {
-                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + item.getOptionId());
+        for (CartRequest.UpdateDTO cart : requestDTOs) {
+            if (!optionIds.add(cart.getOptionId())) {
+                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + cart.getOptionId());
             }
         }
 
-        cartJPARepository.saveAll(cartList);
+        List<Cart> cartList = cartJPARepository.findAllByUserId(user.getId());
 
-        List<CartResponse.SaveOrUpdateDTO> responseDTOs = cartList.stream().map(CartResponse.SaveOrUpdateDTO::new).collect(Collectors.toList());
-        return responseDTOs;
-    }
+        requestDTOs.stream().forEach(updateDTO -> {
+            cartList.stream().forEach(cart -> {
+                if(cart.getId() == updateDTO.getId()){
+                    cart.update(updateDTO.getQuantity(), cart.getPrice() * updateDTO.getQuantity());
+                }
+            });
+        });
+    } // 더티체킹
 
-    public List<CartListDto.Response> findAll(User user) {
+    public CartResponse.FindAllDTO findAll(User user) {
         List<Cart> cartLists = cartJPARepository.findByUserIdOrderByOptionIdAsc(user.getId());
-        List<CartListDto.Response> cartListDTOs = new ArrayList<>();
-
-        for(Cart cartList : cartLists) {
-            CartListDto.Response response = new CartListDto.Response(cartList);
-
-            Option option = optionJPARepository.findById(cartList.getOptionId()).get();
-            Product product = productJPARepository.findById(option.getProduct().getId()).get();
-            response.setProductName(product.getProductName());
-            response.setOptionName(option.getOptionName());
-
-            cartListDTOs.add(response);
-        }
-
-        return cartListDTOs;
+        return new CartResponse.FindAllDTO(cartLists);
     }
+
+
+
 
     public void clear(User user) {
         cartJPARepository.deleteByUserId(user.getId());

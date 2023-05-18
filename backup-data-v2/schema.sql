@@ -36,6 +36,7 @@ CREATE TABLE `cart_tb` (
                                 `quantity` int(11) NOT NULL,
                                 `price` int(11) NOT NULL,
                                 PRIMARY KEY (`id`),
+                                UNIQUE KEY `uk_cart_option_user` (`option_id`, `user_id`),
                                 KEY `cart_user_id_idx` (`user_id`),
                                 KEY `cart_option_id_idx` (`option_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -1,5 +1,7 @@
 package com.example.kakao.cart;
 
+import com.example.kakao.option.Option;
+import com.example.kakao.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,16 +9,15 @@ public class CartRequest {
 
     @Getter @Setter
     public static class SaveDTO {
-        private int userId;
         private int optionId;
         private int quantity;
 
-        public Cart toEntity(int price) {
+        public Cart toEntity(Option option, User user) {
             Cart cart = Cart.builder()
-                    .userId(userId)
-                    .optionId(optionId)
+                    .user(user)
+                    .option(option)
                     .quantity(quantity)
-                    .price(price)
+                    .price(option.getPrice() * quantity)
                     .build();
             return cart;
         }
@@ -25,17 +26,15 @@ public class CartRequest {
     @Getter @Setter
     public static class UpdateDTO {
         private int id;
-        private int userId;
         private int optionId;
         private int quantity;
 
-        public Cart toEntity(int price) {
+        public Cart toEntity(Option option, User user) {
             Cart cart = Cart.builder()
-                    .id(id)
-                    .userId(userId)
-                    .optionId(optionId)
+                    .user(user)
+                    .option(option)
                     .quantity(quantity)
-                    .price(price)
+                    .price(option.getPrice() * quantity)
                     .build();
             return cart;
         }

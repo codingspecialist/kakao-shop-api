@@ -1,24 +1,72 @@
 package com.example.kakao.cart;
 
+import com.example.kakao.option.Option;
+import com.example.kakao.product.Product;
 import lombok.Getter;
 import lombok.Setter;
 
-public class CartResponse {
-    @Getter
-    @Setter
-    public static class SaveOrUpdateDTO {
-        private int id;
-        private int userId;
-        private int optionId;
-        private int quantity;
-        private int price;
+import java.util.List;
+import java.util.stream.Collectors;
 
-        public SaveOrUpdateDTO(Cart cart) {
-            this.id = cart.getId();
-            this.userId = cart.getUserId();
-            this.optionId = cart.getOptionId();
-            this.quantity = cart.getQuantity();
-            this.price = cart.getPrice();
+public class CartResponse {
+
+    @Getter @Setter
+    public static class FindAllDTO{
+        private List<ProductDTO> products;
+        private int totalPrice;
+
+        public FindAllDTO(List<Cart> cartList) {
+            this.products = cartList.stream()
+                    .map(cart -> cart.getOption().getProduct()).distinct()
+                    .map(product -> new ProductDTO(cartList, product)).collect(Collectors.toList());
+            this.totalPrice = cartList.stream().mapToInt(cart -> cart.getOption().getPrice() * cart.getQuantity()).sum();
+        }
+
+
+        @Getter
+        @Setter
+        public class ProductDTO {
+            private int id;
+            private String productName;
+            private List<CartDTO> carts;
+
+            public ProductDTO(List<Cart> cartList, Product product) {
+                this.id = product.getId();
+                this.productName = product.getProductName();
+                this.carts = cartList.stream()
+                        .filter(cart -> cart.getOption().getProduct().getId() == product.getId())
+                        .map(CartDTO::new)
+                        .collect(Collectors.toList());
+            }
+
+            @Getter @Setter
+            public class CartDTO {
+                private int id;
+                private OptionDTO option;
+                private int quantity;
+                private int price;
+
+                public CartDTO(Cart cart) {
+                    this.id = cart.getId();
+                    this.option = new OptionDTO(cart.getOption());
+                    this.quantity = cart.getQuantity();
+                    this.price = cart.getOption().getPrice()*cart.getQuantity();
+                }
+
+                @Getter @Setter
+                public class OptionDTO {
+                    private int id;
+                    private String optionName;
+                    private int price;
+
+
+                    public OptionDTO(Option option) {
+                        this.id = option.getId();
+                        this.optionName = option.getOptionName();
+                        this.price = option.getPrice();
+                    }
+                }
+            }
         }
     }
 }
