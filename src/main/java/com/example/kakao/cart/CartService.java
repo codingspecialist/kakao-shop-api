@@ -64,7 +64,6 @@ public class CartService {
             try {
                 cartJPARepository.save(cart);
             }catch (Exception e){
-                System.out.println(e.getMessage());
                 throw new Exception500("해당 옵션은 이미 장바구니에 담겨 있습니다 : "+cart.getOption().getId());
             }
         });
@@ -85,21 +84,17 @@ public class CartService {
             throw new Exception400("동일한 장바구니 아이디를 주문할 수 없습니다");
         }
 
-        if(cartIds.size() != requestIds.size()){
-            throw new Exception400("주문시에는 수량만 업데이트할 수 있습니다");
-        }
-
         for (Integer requestId : requestIds) {
             if(!cartIds.contains(requestId)){
                 throw new Exception400("장바구니에 없는 상품은 주문할 수 없습니다 : "+requestId);
             }
         }
 
-
-        // 장바구니 수량이 동일하다면 업데이트는 되지 않는다.
         for (CartRequest.UpdateDTO updateDTO : requestDTOs) {
             for (Cart cart : cartList) {
-                cart.update(updateDTO.getQuantity(), cart.getPrice() * updateDTO.getQuantity());
+                if(cart.getId() == updateDTO.getId()){
+                    cart.update(updateDTO.getQuantity(), cart.getPrice() * updateDTO.getQuantity());
+                }
             }
         }
     } // 더티체킹
@@ -111,64 +106,11 @@ public class CartService {
 
     @Transactional
     public void clear(User user) {
-        cartJPARepository.deleteByUserId(user.getId());
-    }
-
-
-
-    @Transactional
-    public void addCartListV1(List<CartRequest.SaveDTO> requestDTOs, User user) {
-        // 동일한 옵션이 들어오면 예외처리
-        Set<Integer> optionIds = new HashSet<>();
-        for (CartRequest.SaveDTO cart : requestDTOs) {
-            if (!optionIds.add(cart.getOptionId())) {
-                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + cart.getOptionId());
-            }
-        }
-
-        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
-            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
-                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
-            );
-            Optional<Cart> cartOP = cartJPARepository.findByUserIdAndOptionId(user.getId(), optionPS.getId());
-            if(cartOP.isPresent()){
-                throw new Exception500("해당 옵션은 이미 장바구니에 담겨 있습니다 : "+optionPS.getId());
-            }
-
-            return cartDTO.toEntity(optionPS, user);
-        }).collect(Collectors.toList());
-
         try {
-            cartJPARepository.saveAll(cartList);
+            cartJPARepository.deleteByUserId(user.getId());
         }catch (Exception e){
-            throw new Exception500(e.getMessage());
-        }
-    }
-
-    @Transactional
-    public void addCartListV2(List<CartRequest.SaveDTO> requestDTOs, User user) {
-        // 동일한 옵션이 들어오면 예외처리
-        Set<Integer> optionIds = new HashSet<>();
-        for (CartRequest.SaveDTO cart : requestDTOs) {
-            if (!optionIds.add(cart.getOptionId())) {
-                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + cart.getOptionId());
-            }
+            throw new Exception500("장바구니 비우기 실패 : "+e.getMessage());
         }
 
-        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
-            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
-                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
-            );
-            return cartDTO.toEntity(optionPS, user);
-        }).collect(Collectors.toList());
-
-        cartList.stream().forEach(cart -> {
-            try {
-                cartJPARepository.save(cart);
-            }catch (DataIntegrityViolationException e){
-                e.printStackTrace();
-                throw new Exception500("해당 옵션은 이미 장바구니에 담겨 있습니다 : "+cart.getOption().getId());
-            }
-        });
     }
 }

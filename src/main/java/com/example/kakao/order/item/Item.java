@@ -9,7 +9,10 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="item_tb")
+@Table(name="item_tb", indexes = {
+        @Index(name = "item_option_id_idx", columnList = "option_id"),
+        @Index(name = "item_order_id_idx", columnList = "order_id")
+})
 public class Item {
 
     @Id
@@ -21,7 +24,9 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
+    @Column(nullable = false)
     private int quantity;
+    @Column(nullable = false)
     private int price;
 
 

@@ -9,14 +9,20 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="option_tb")
+@Table(name="option_tb",
+        indexes = {
+                @Index(name = "option_product_id_idx", columnList = "product_id")
+        })
 public class Option {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
+
+    @Column(length = 100, nullable = false)
     private String optionName;
     private int price;
 

@@ -32,6 +32,7 @@ public class OrderRestController {
         return ResponseEntity.ok(apiResult);
     }
 
+    // 사용 안함
     @PostMapping("/orders/clear")
     public ResponseEntity<?> clear() {
         orderService.clear();

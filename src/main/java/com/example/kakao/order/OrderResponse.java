@@ -13,7 +13,6 @@ public class OrderResponse {
     @Getter @Setter
     public static class SaveDTO {
         private int orderId;
-
         public SaveDTO(int orderId) {
             this.orderId = orderId;
         }
@@ -36,12 +35,10 @@ public class OrderResponse {
 
         @Getter @Setter
         public class ProductDTO {
-            private int id;
             private String productName;
             private List<ItemDTO> items;
 
             public ProductDTO(List<Item> itemList, Product product) {
-                this.id = product.getId();
                 this.productName = product.getProductName();
                 this.items = itemList.stream()
                         .filter(item -> item.getOption().getProduct().getId() == product.getId())

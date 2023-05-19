@@ -10,9 +10,15 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name="cart_tb")
+@Table(name="cart_tb",
+        indexes = {
+                @Index(name = "cart_user_id_idx", columnList = "user_id"),
+                @Index(name = "cart_option_id_idx", columnList = "option_id")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_cart_option_user", columnNames = {"user_id", "option_id"})
+        })
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,7 +28,11 @@ public class Cart {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Option option;
+
+    @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
     private int price;
 
     @Builder
@@ -34,6 +44,7 @@ public class Cart {
         this.price = price;
     }
 
+    // 장바구니 업데이트
     public void update(int quantity, int price){
         this.quantity = quantity;
         this.price = price;
