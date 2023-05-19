@@ -1,16 +1,26 @@
 package com.example.kakao.integration;
 
+import com.example.kakao.user.User;
 import com.example.kakao.user.UserJPARepository;
+import com.example.kakao.user.UserRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import javax.persistence.EntityManager;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ActiveProfiles("test")
 @AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8080)
@@ -26,6 +36,59 @@ public class UserRestControllerTest extends MyRestDoc{
     private UserJPARepository userRepository;
     @Autowired
     private EntityManager em;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    public void setUp() {
+        // truncate 되어 유저 데이터가 없기 때문에 사용
+        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
+        joinDTO.setEmail("cos@nate.com");
+        joinDTO.setPassword(passwordEncoder.encode("cos1234!"));
+        joinDTO.setUsername("cos");
+        User user = joinDTO.toEntity();
+        userRepository.save(user);
+    }
+
+    @Test
+    // (기능1) 회원가입
+    public void join_test() throws Exception {
+        // given
+        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
+        joinDTO.setEmail("cos1@nate.com");
+        joinDTO.setPassword("cos1234!");
+        joinDTO.setUsername("cos1");
+
+        String requestBody = om.writeValueAsString(joinDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+    }
+
+    // (기능2) 로그인
+    @Test
+    public void login() throws Exception {
+        // given
+        UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
+        loginDTO.setEmail("cos@nate.com");
+        loginDTO.setPassword("cos1234!");
+
+        String requestBody = om.writeValueAsString(loginDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/login")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
 
 
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+    }
 }
