@@ -3,6 +3,7 @@ package com.example.kakao.order;
 import com.example.kakao._core.errors.exception.Exception400;
 import com.example.kakao._core.errors.exception.Exception404;
 import com.example.kakao._core.errors.exception.Exception500;
+import com.example.kakao.cart.Cart;
 import com.example.kakao.cart.CartJPARepository;
 import com.example.kakao.option.Option;
 import com.example.kakao.option.OptionJPARepository;
@@ -28,27 +29,26 @@ public class OrderService {
     private final OptionJPARepository optionJPARepository;
     private final CartJPARepository cartJPARepository;
 
-    // 장바구니에 없는 데이터로 추후 결재를 할 수 있기 때문에 optionId 받기
     @Transactional
-    public OrderResponse.SaveDTO saveOrder(List<OrderRequest.SaveItemDTO> requestDTOs, User user) {
-        // 1. 동일한 옵션이 들어오면 예외처리
-        Set<Integer> optionIds = new HashSet<>();
-        for (OrderRequest.SaveItemDTO item : requestDTOs) {
-            if (!optionIds.add(item.getOptionId())) {
-                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + item.getOptionId());
-            }
+    public OrderResponse.SaveDTO saveOrder(User user) {
+        // 1. 유저 장바구니 조회
+        List<Cart> cartListPS = cartJPARepository.findAllByUserId(user.getId());
+        if(cartListPS.size() == 0){
+            throw new Exception404("장바구니에 아무 내역도 존재하지 않습니다");
         }
 
         // 2. 주문 생성
-        Order order = new Order();
-        order.setUser(user);
-        Order orderPS = orderJPARepository.save(order);
+        Order orderPS = orderJPARepository.save(Order.builder().user(user).build());
 
-        // 3. 아이템 리스트 DB 저장
+        // 3. 주문 아이템 저장
         List<Item> itemList = new ArrayList<>();
-        for(OrderRequest.SaveItemDTO requestDTO : requestDTOs) {
-            Option optionPS = optionJPARepository.findById(requestDTO.getOptionId()).get();
-            Item item = requestDTO.toEntity(optionPS, orderPS);
+        for (Cart cartPS : cartListPS) {
+            Item item = Item.builder()
+                    .option(cartPS.getOption())
+                    .order(orderPS)
+                    .quantity(cartPS.getQuantity())
+                    .price(cartPS.getOption().getPrice() * cartPS.getQuantity())
+                    .build();
             itemList.add(item);
         }
         try {
@@ -57,15 +57,14 @@ public class OrderService {
             throw new Exception500("결재 실패 : "+e.getMessage());
         }
 
-        // 4. 장바구니 초기화 (결재가 끝나면 장바구니가 초기화 됨)
+        // 4. 유저 장바구니 초기화 (결재가 끝나면 장바구니가 초기화 됨)
         try {
             cartJPARepository.deleteByUserId(user.getId());
         }catch (Exception e){
             throw new Exception500("장바구니 초기화 실패 : "+e.getMessage());
         }
-        
 
-        return new OrderResponse.SaveDTO(order.getId());
+        return new OrderResponse.SaveDTO(orderPS.getId());
     }
 
     public OrderResponse.FindALLDTO findAll(int id) {
@@ -84,4 +83,44 @@ public class OrderService {
         }
 
     }
+
+//    @Transactional
+//    public OrderResponse.SaveDTO saveOrderV1(List<OrderRequest.SaveItemDTO> requestDTOs, User user) {
+//        // 1. 동일한 옵션이 들어오면 예외처리
+//        Set<Integer> optionIds = new HashSet<>();
+//        for (OrderRequest.SaveItemDTO item : requestDTOs) {
+//            if (!optionIds.add(item.getOptionId())) {
+//                throw new Exception400("동일한 옵션이 중복되어 들어왔습니다: " + item.getOptionId());
+//            }
+//        }
+//
+//        // 2. 주문 생성
+//        Order order = new Order();
+//        order.setUser(user);
+//        Order orderPS = orderJPARepository.save(order);
+//
+//
+//        // 3. 아이템 리스트 DB 저장
+//        List<Item> itemList = new ArrayList<>();
+//        for(OrderRequest.SaveItemDTO requestDTO : requestDTOs) {
+//            Option optionPS = optionJPARepository.findById(requestDTO.getOptionId()).get();
+//            Item item = requestDTO.toEntity(optionPS, orderPS);
+//            itemList.add(item);
+//        }
+//        try {
+//            ItemJPARepository.saveAll(itemList);
+//        }catch (Exception e){
+//            throw new Exception500("결재 실패 : "+e.getMessage());
+//        }
+//
+//        // 4. 장바구니 초기화 (결재가 끝나면 장바구니가 초기화 됨)
+//        try {
+//            cartJPARepository.deleteByUserId(user.getId());
+//        }catch (Exception e){
+//            throw new Exception500("장바구니 초기화 실패 : "+e.getMessage());
+//        }
+//
+//
+//        return new OrderResponse.SaveDTO(order.getId());
+//    }
 }

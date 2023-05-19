@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Setter // 삭제 예정
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity

@@ -5,23 +5,11 @@ import com.example.kakao._core.errors.exception.Exception404;
 import com.example.kakao._core.errors.exception.Exception500;
 import com.example.kakao.option.Option;
 import com.example.kakao.option.OptionJPARepository;
-import com.example.kakao.order.Order;
-import com.example.kakao.order.OrderRequest;
-import com.example.kakao.order.OrderResponse;
-import com.example.kakao.order.item.Item;
-import com.example.kakao.product.Product;
-import com.example.kakao.product.ProductJPARepository;
-import com.example.kakao.product.ProductResponse;
 import com.example.kakao.user.User;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,7 +52,7 @@ public class CartService {
             try {
                 cartJPARepository.save(cart);
             }catch (Exception e){
-                throw new Exception500("해당 옵션은 이미 장바구니에 담겨 있습니다 : "+cart.getOption().getId());
+                throw new Exception500("장바구니 담기 중에 오류가 발생했습니다 : "+e.getMessage());
             }
         });
     }
@@ -74,7 +62,7 @@ public class CartService {
         List<Cart> cartList = cartJPARepository.findAllByUserId(user.getId());
 
         List<Integer> cartIds = cartList.stream().map(cart -> cart.getId()).collect(Collectors.toList());
-        List<Integer> requestIds =requestDTOs.stream().map(dto -> dto.getId()).collect(Collectors.toList());
+        List<Integer> requestIds =requestDTOs.stream().map(dto -> dto.getCartId()).collect(Collectors.toList());
 
         if(cartIds.size() == 0){
             throw new Exception404("주문할 장바구니 상품이 없습니다");
@@ -92,7 +80,7 @@ public class CartService {
 
         for (CartRequest.UpdateDTO updateDTO : requestDTOs) {
             for (Cart cart : cartList) {
-                if(cart.getId() == updateDTO.getId()){
+                if(cart.getId() == updateDTO.getCartId()){
                     cart.update(updateDTO.getQuantity(), cart.getPrice() * updateDTO.getQuantity());
                 }
             }

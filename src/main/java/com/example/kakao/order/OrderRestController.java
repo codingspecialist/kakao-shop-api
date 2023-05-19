@@ -19,8 +19,8 @@ public class OrderRestController {
 
     // (기능12) 결재
     @PostMapping("/orders/save")
-    public ResponseEntity<?> saveOrder(@RequestBody @Valid List<OrderRequest.SaveItemDTO> requestDTOs, Errors errors, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        OrderResponse.SaveDTO responseDTO = orderService.saveOrder(requestDTOs, userDetails.getUser());
+    public ResponseEntity<?> saveOrder(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        OrderResponse.SaveDTO responseDTO = orderService.saveOrder(userDetails.getUser());
         return ResponseEntity.ok(ApiUtils.success(responseDTO));
     }
 
@@ -39,4 +39,11 @@ public class OrderRestController {
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
         return ResponseEntity.ok(apiResult);
     }
+
+//    @PostMapping("/orders/save")
+//    public ResponseEntity<?> saveOrderV1(@RequestBody @Valid List<OrderRequest.SaveItemDTO> requestDTOs, Errors errors, @AuthenticationPrincipal CustomUserDetails userDetails) {
+//        OrderResponse.SaveDTO responseDTO = orderService.saveOrder(requestDTOs, userDetails.getUser());
+//        return ResponseEntity.ok(ApiUtils.success(responseDTO));
+//    }
+
 }

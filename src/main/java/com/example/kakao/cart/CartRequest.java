@@ -25,7 +25,7 @@ public class CartRequest {
 
     @Getter @Setter
     public static class UpdateDTO {
-        private int id;
+        private int cartId;
         private int quantity;
     }
 }
