@@ -77,3 +77,13 @@ INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('45', '1
 INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('46', '14', '[특품] 샤인머스켓 2kg 2-3수', '23900');
 INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('47', '15', '화이트', '148000');
 INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('48', '15', '블랙', '148000');
+
+
+INSERT INTO order_tb (`id`,`user_id`) VALUES ('1', '1');
+
+INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('1', '1', '5', '10000', '1');
+INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('2', '2', '5', '10000', '1');
+INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('3', '10', '5', '10000', '1');
+
+
+
