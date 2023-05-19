@@ -20,6 +20,10 @@
 - RestDoc API 문서 작성
 - AWS 배포 (엘라스틱 빈 스톡 deploy폴더 - jar파일, images폴더)
 
+## 데이터 초기화
+- admin@nate.com 으로 로그인 (비번 meta1234!)
+- http://localhost:8080/admin/reset (post 요청)
+
 ## 사용자 시나리오
 더미데이터가 들어가 있어서 바로 테스트 해보면 된다.
 
