@@ -1,15 +1,15 @@
 # KAKAO 쇼핑
 
 ## 백엔드 기능 정리
-- 회원가입(완) http://localhost:8080/join
-- 로그인(완) http://localhost:8080/login
-- 전체 상품 목록 조회 (완) http://localhost:8080/products
-- 개별 상품 상세 조회 (완) http://localhost:8080/products/{id}
-- 장바구니 담기 (완) http://localhost:8080/carts/add
-- 장바구니 조회 (완) http://localhost:8080/carts
-- 주문(완) - 주문버튼 클릭 : 장바구니 업데이트 http://localhost:8080/carts/update
-- 결제(완) - 결재버튼 클릭 : 주문하기 http://localhost:8080/orders/save
-- 주문 결과 확인(완) http://localhost:8080/orders/{id}
+- 회원가입(완) http://http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/join
+- 로그인(완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//login
+- 전체 상품 목록 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products
+- 개별 상품 상세 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products/{id}
+- 장바구니 담기 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/add
+- 장바구니 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts
+- 주문(완) - 주문버튼 클릭 : 장바구니 업데이트 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/update
+- 결제(완) - 결재버튼 클릭 : 주문하기 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/save
+- 주문 결과 확인(완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/{id}
 
 ## 남은 일
 - API 요청 컨트롤러 기능 매칭 (완)
