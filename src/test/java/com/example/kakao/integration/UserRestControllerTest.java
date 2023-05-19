@@ -36,18 +36,9 @@ public class UserRestControllerTest extends MyRestDoc{
     private UserJPARepository userRepository;
     @Autowired
     private EntityManager em;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp() {
-        // truncate 되어 유저 데이터가 없기 때문에 사용
-        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
-        joinDTO.setEmail("cos@nate.com");
-        joinDTO.setPassword(passwordEncoder.encode("cos1234!"));
-        joinDTO.setUsername("cos");
-        User user = joinDTO.toEntity();
-        userRepository.save(user);
     }
 
     @Test
@@ -55,9 +46,9 @@ public class UserRestControllerTest extends MyRestDoc{
     public void join_test() throws Exception {
         // given
         UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
-        joinDTO.setEmail("cos1@nate.com");
+        joinDTO.setEmail("cos@nate.com");
         joinDTO.setPassword("cos1234!");
-        joinDTO.setUsername("cos1");
+        joinDTO.setUsername("cos");
 
         String requestBody = om.writeValueAsString(joinDTO);
 
@@ -76,8 +67,8 @@ public class UserRestControllerTest extends MyRestDoc{
     public void login() throws Exception {
         // given
         UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
-        loginDTO.setEmail("cos@nate.com");
-        loginDTO.setPassword("cos1234!");
+        loginDTO.setEmail("alss@nate.com");
+        loginDTO.setPassword("alss1234!");
 
         String requestBody = om.writeValueAsString(loginDTO);
 
