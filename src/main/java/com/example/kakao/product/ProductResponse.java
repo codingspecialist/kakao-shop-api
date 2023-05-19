@@ -36,6 +36,7 @@ public class ProductResponse {
         private String description;
         private String image;
         private int price;
+        private int starCount; // 0~5
         private List<OptionDTO> options;
 
         public FindByIdDTO(Product product, List<Option> optionList) {
@@ -44,6 +45,7 @@ public class ProductResponse {
             this.description = product.getDescription();
             this.image = product.getImage();
             this.price = product.getPrice();
+            this.starCount = 5; // 임시로 추가해둠 (요구사항에는 없음)
             this.options = optionList.stream().map(OptionDTO::new).collect(Collectors.toList());
         }
 

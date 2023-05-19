@@ -26,17 +26,6 @@ public class CartRequest {
     @Getter @Setter
     public static class UpdateDTO {
         private int id;
-        private int optionId;
         private int quantity;
-
-        public Cart toEntity(Option option, User user) {
-            Cart cart = Cart.builder()
-                    .user(user)
-                    .option(option)
-                    .quantity(quantity)
-                    .price(option.getPrice() * quantity)
-                    .build();
-            return cart;
-        }
     }
 }
