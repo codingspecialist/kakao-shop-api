@@ -211,7 +211,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```
 
 ### 5. 장바구니 조회
-- method : post
+- method : get
 - url : http://localhost:8080/carts
 - request header :
 ```text
@@ -286,7 +286,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```
 
 ### 7. 장바구니 조회 (결재 페이지에서 확인)
-- method : post
+- method : get
 - url : http://localhost:8080/carts
 - request header :
 ```text
@@ -350,7 +350,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```
 
 ### 9. 주문결과 확인
-- method : post
+- method : get
 - url : http://localhost:8080/orders/{id}
 - request header :
 ```text
