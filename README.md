@@ -1,33 +1,34 @@
 # KAKAO 쇼핑
 
-## 백엔드 기능 정리
-- 회원가입(완) http://http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/join
-- 로그인(완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//login
-- 전체 상품 목록 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products
-- 개별 상품 상세 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products/{id}
-- 장바구니 담기 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/add
-- 장바구니 조회 (완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts
-- 주문(완) - 주문버튼 클릭 : 장바구니 업데이트 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/update
-- 결제(완) - 결재버튼 클릭 : 주문하기 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/save
-- 주문 결과 확인(완) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/{id}
+## 배포 완료
+- host : http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com
+
+- 회원가입(POST) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/join
+- 로그인(POST) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//login
+- 전체 상품 목록 조회 (GET) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products
+- 개별 상품 상세 조회 (GET) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//products/{id}
+- 장바구니 담기 (POST) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/add
+- 장바구니 조회 (GET) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts
+- 주문(POST) - 주문버튼 클릭 : 장바구니 업데이트 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//carts/update
+- 결제(POST) - 결재버튼 클릭 : 주문하기 http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/save
+- 주문 결과 확인(GET) http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com//orders/{id}
 
 ## 남은 일
 - API 요청 컨트롤러 기능 매칭 (완)
 - 유효성 검사 - UserRequest 유효성 검사 (완)
 - 화면에 따른 DTO 정리 (완)
-- 쿼리 튜닝 + open in view 비활성화 (완)
+- AWS 배포 (완)
+- 쿼리 튜닝
 - 테스트 코드 작성
 - RestDoc API 문서 작성
-- AWS 배포 (엘라스틱 빈 스톡 deploy폴더 - jar파일, images폴더)
 
 ## 데이터 초기화
 - admin@nate.com 으로 로그인 (비번 meta1234!)
-- http://localhost:8080/admin/reset (post 요청)
+- http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/admin/reset (post 요청)
 
 ## 사용자 시나리오
-더미데이터가 들어가 있어서 바로 테스트 해보면 된다.
 
-### 1. 로그인
+### 1. 로그인 (기능2)
 - method : post
 - url : http://localhost:8080/login
 - request body :
@@ -54,7 +55,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 email = ssar@nate.com, roles = ROLE_USER
 ```
 
-### 2. 전체 상품 목록 조회
+### 2. 전체 상품 목록 조회 (기능4)
 - method : get
 - url : http://localhost:8080/products
 - param : page={number}
@@ -135,7 +136,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 3. 개별 상품 상세 조회(상품 + 옵션리스트)
+### 3. 개별 상품 상세 조회 (기능5)
 - method : get
 - url : http://localhost:8080/products/{id}
 - request header :
@@ -185,7 +186,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 4. 장바구니 담기
+### 4. 장바구니 담기 (기능8)
 - method : post
 - url : http://localhost:8080/carts/add
 - request header :
@@ -214,7 +215,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 5. 장바구니 조회
+### 5. 장바구니 조회 (기능9)
 - method : get
 - url : http://localhost:8080/carts
 - request header :
@@ -260,7 +261,9 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 6. 장바구니 수정 (주문하기)
+### 6. 장바구니 수정 (기능11)
+- 주문하기를 할 때 장바구니 데이터를 update하고 그 결과를 응답받는다.
+- 결재페이지에서 이 응답을 사용해도 되고, 다시 장바구니 조회 API를 사용해도 된다
 - method : post
 - url : http://localhost:8080/carts/update
 - request header :
@@ -284,14 +287,34 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 ```json
 {
   "success": true,
-  "response": null,
+  "response": {
+    "carts": [
+      {
+        "cartId": 1,
+        "optionId": 1,
+        "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
+        "quantity": 10,
+        "price": 100000
+      },
+      {
+        "cartId": 2,
+        "optionId": 2,
+        "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
+        "quantity": 10,
+        "price": 109000
+      }
+    ],
+    "totalPrice": 209000
+  },
   "error": null
 }
 ```
 
-### 7. 장바구니 조회 (결재 페이지에서 확인)
-- method : get
-- url : http://localhost:8080/carts
+### 7. 주문하기 (기능12)
+- 결재하기 버튼을 클릭하면 주문이 되고, 결재는 생략한다. 주문이 완료 되면 해당 유저의 장바구니가 비워지고 주문 결과를 응답받는다. 
+- 주문결과 페이지에서 이 응답을 사용해도 되고, 주문결과 확인 API 요청을 해도 된다.
+- method : post
+- url : http://localhost:8080/orders/save
 - request header :
 ```text
 Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlkIjoxLCJleHAiOjE2ODQ2NjQ3NzB9.xr-zkl6eshxAeahfi2PMaDrqyrFSsDiIqhF0_VZD-f0ByTrBQruL96iLl1EFDGm8SbHxPSjjybsApl6hZvTd5g
@@ -301,28 +324,20 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 {
   "success": true,
   "response": {
+    "id": 1,
     "products": [
       {
-        "id": 1,
         "productName": "기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전",
-        "carts": [
+        "items": [
           {
             "id": 1,
-            "option": {
-              "id": 1,
-              "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
-              "price": 10000
-            },
+            "optionName": "01. 슬라이딩 지퍼백 크리스마스에디션 4종",
             "quantity": 10,
             "price": 100000
           },
           {
             "id": 2,
-            "option": {
-              "id": 2,
-              "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
-              "price": 10900
-            },
+            "optionName": "02. 슬라이딩 지퍼백 플라워에디션 5종",
             "quantity": 10,
             "price": 109000
           }
@@ -335,25 +350,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9s
 }
 ```
 
-### 8. 주문하기 - 결재하기 버튼 클릭시 (결재시 해당 유저의 장바구니 비워짐)
-- method : post
-- url : http://localhost:8080/orders/save
-- request header :
-```text
-Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc2FyQG5hdGUuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlkIjoxLCJleHAiOjE2ODQ2NjQ3NzB9.xr-zkl6eshxAeahfi2PMaDrqyrFSsDiIqhF0_VZD-f0ByTrBQruL96iLl1EFDGm8SbHxPSjjybsApl6hZvTd5g
-```
-- response body :
-```json
-{
-  "success": true,
-  "response": {
-    "orderId": 1
-  },
-  "error": null
-}
-```
-
-### 9. 주문결과 확인
+### 8. 주문결과 확인 (기능13)
 - method : get
 - url : http://localhost:8080/orders/{id}
 - request header :

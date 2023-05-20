@@ -58,7 +58,7 @@ public class CartService {
     }
 
     @Transactional
-    public void update(List<CartRequest.UpdateDTO> requestDTOs, User user) {
+    public CartResponse.UpdateDTO update(List<CartRequest.UpdateDTO> requestDTOs, User user) {
         List<Cart> cartList = cartJPARepository.findAllByUserId(user.getId());
 
         List<Integer> cartIds = cartList.stream().map(cart -> cart.getId()).collect(Collectors.toList());
@@ -85,8 +85,11 @@ public class CartService {
                 }
             }
         }
+        return new CartResponse.UpdateDTO(cartList);
     } // 더티체킹
 
+
+    // this.totalPrice = cartList.stream().mapToInt(cart -> cart.getOption().getPrice() * cart.getQuantity()).sum();
     public CartResponse.FindAllDTO findAll(User user) {
         List<Cart> cartLists = cartJPARepository.findByUserIdOrderByOptionIdAsc(user.getId());
         return new CartResponse.FindAllDTO(cartLists);

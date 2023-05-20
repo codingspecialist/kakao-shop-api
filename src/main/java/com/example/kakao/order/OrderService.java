@@ -30,7 +30,7 @@ public class OrderService {
     private final CartJPARepository cartJPARepository;
 
     @Transactional
-    public OrderResponse.SaveDTO saveOrder(User user) {
+    public OrderResponse.FindByIdDTO saveOrder(User user) {
         // 1. 유저 장바구니 조회
         List<Cart> cartListPS = cartJPARepository.findAllByUserId(user.getId());
         if(cartListPS.size() == 0){
@@ -64,15 +64,15 @@ public class OrderService {
             throw new Exception500("장바구니 초기화 실패 : "+e.getMessage());
         }
 
-        return new OrderResponse.SaveDTO(orderPS.getId());
+        return new OrderResponse.FindByIdDTO(orderPS, itemList);
     }
 
-    public OrderResponse.FindALLDTO findAll(int id) {
+    public OrderResponse.FindByIdDTO findById(int id) {
         Order orderPS = orderJPARepository.findById(id).orElseThrow(
                 ()-> new Exception404("해당 주문을 찾을 수 없습니다 : "+id)
         );
         List<Item> itemList = ItemJPARepository.findAllByOrderId(id);
-        return new OrderResponse.FindALLDTO(orderPS, itemList);
+        return new OrderResponse.FindByIdDTO(orderPS, itemList);
     }
 
     public void clear() {

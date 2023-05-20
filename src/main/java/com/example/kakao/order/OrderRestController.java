@@ -19,15 +19,15 @@ public class OrderRestController {
 
     // (기능12) 결재
     @PostMapping("/orders/save")
-    public ResponseEntity<?> saveOrder(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        OrderResponse.SaveDTO responseDTO = orderService.saveOrder(userDetails.getUser());
+    public ResponseEntity<?> save(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        OrderResponse.FindByIdDTO responseDTO = orderService.saveOrder(userDetails.getUser());
         return ResponseEntity.ok(ApiUtils.success(responseDTO));
     }
 
     // (기능13) 주문 결과 확인
     @GetMapping("/orders/{id}")
-    public ResponseEntity<?> findAll(@PathVariable int id) {
-        OrderResponse.FindALLDTO responseDTO = orderService.findAll(id);
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        OrderResponse.FindByIdDTO responseDTO = orderService.findById(id);
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
         return ResponseEntity.ok(apiResult);
     }

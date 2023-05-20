@@ -11,20 +11,12 @@ import java.util.stream.Collectors;
 public class OrderResponse {
 
     @Getter @Setter
-    public static class SaveDTO {
-        private int orderId;
-        public SaveDTO(int orderId) {
-            this.orderId = orderId;
-        }
-    }
-
-    @Getter @Setter
-    public static class FindALLDTO {
+    public static class FindByIdDTO {
         private int id;
         private List<ProductDTO> products;
         private int totalPrice;
 
-        public FindALLDTO(Order order, List<Item> itemList) {
+        public FindByIdDTO(Order order, List<Item> itemList) {
             this.id = order.getId();
             this.products = itemList.stream()
                     .map(item -> item.getOption().getProduct()).distinct()
