@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.persistence.EntityManager;
 
@@ -73,7 +74,7 @@ public class ProductRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response[0].description").value(""));
         resultActions.andExpect(jsonPath("$.response[0].image").value("/images/1.jpg"));
         resultActions.andExpect(jsonPath("$.response[0].price").value(1000));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
@@ -95,5 +96,6 @@ public class ProductRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.description").value(""));
         resultActions.andExpect(jsonPath("$.response.image").value("/images/1.jpg"));
         resultActions.andExpect(jsonPath("$.response.price").value(1000));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 }

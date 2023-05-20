@@ -23,6 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,7 +100,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
@@ -123,7 +124,7 @@ public class CartRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.products[0].carts[0].option.id").value(5));
         resultActions.andExpect(jsonPath("$.response.products[0].carts[0].option.optionName").value("2겹 식빵수세미 6매"));
         resultActions.andExpect(jsonPath("$.response.products[0].carts[0].option.price").value(8900));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
@@ -156,6 +157,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
 }

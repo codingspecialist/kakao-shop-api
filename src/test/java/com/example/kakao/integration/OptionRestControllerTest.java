@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.persistence.EntityManager;
 
@@ -72,7 +73,7 @@ public class OptionRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response[0].productId").value(1));
         resultActions.andExpect(jsonPath("$.response[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
         resultActions.andExpect(jsonPath("$.response[0].price").value(10000));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
@@ -93,5 +94,6 @@ public class OptionRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response[0].productId").value(1));
         resultActions.andExpect(jsonPath("$.response[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
         resultActions.andExpect(jsonPath("$.response[0].price").value(10000));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 }

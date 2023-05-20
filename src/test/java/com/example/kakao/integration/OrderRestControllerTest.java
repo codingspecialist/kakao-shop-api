@@ -19,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.persistence.EntityManager;
 
@@ -79,7 +80,7 @@ public class OrderRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].quantity").value(5));
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(50000));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
@@ -103,7 +104,7 @@ public class OrderRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].optionName").value("2겹 식빵수세미 6매"));
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].quantity").value(3));
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(26700));
-
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
 }

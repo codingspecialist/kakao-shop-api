@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.persistence.EntityManager;
 
@@ -60,11 +61,12 @@ public class UserRestControllerTest extends MyRestDoc{
 
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     // (기능2) 로그인
     @Test
-    public void login() throws Exception {
+    public void login_test() throws Exception {
         // given
         UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
         loginDTO.setEmail("alss@nate.com");
@@ -81,5 +83,6 @@ public class UserRestControllerTest extends MyRestDoc{
 
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 }
