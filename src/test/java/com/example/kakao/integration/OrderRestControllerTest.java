@@ -92,9 +92,17 @@ public class OrderRestControllerTest extends MyRestDoc {
                         .header("Authorization", token)
         );
 
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
+
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response.orderId").value(2));
+        resultActions.andExpect(jsonPath("$.response.id").value(2));
+        resultActions.andExpect(jsonPath("$.response.products[0].productName").value("기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].id").value(4));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].optionName").value("2겹 식빵수세미 6매"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].quantity").value(3));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(26700));
 
     }
 
