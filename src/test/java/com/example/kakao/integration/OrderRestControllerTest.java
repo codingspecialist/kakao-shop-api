@@ -83,7 +83,7 @@ public class OrderRestControllerTest extends MyRestDoc {
     }
 
     @Test
-    // (기능13) 주문 결과 확인
+    // (기능13) 주문하기 - 결재하기 버튼 클릭시 (결재시 해당 유저의 장바구니 비워짐)
     public void saveOrder_test() throws Exception {
 
         // when
