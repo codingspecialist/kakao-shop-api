@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import javax.persistence.EntityManager;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ActiveProfiles("test")
@@ -70,9 +71,6 @@ public class OrderRestControllerTest extends MyRestDoc {
                         .header("Authorization", token)
         );
 
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("테스트 : " + responseBody);
-
         // verify
         resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andExpect(jsonPath("$.response.id").value(1));
@@ -83,4 +81,21 @@ public class OrderRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(50000));
 
     }
+
+    @Test
+    // (기능13) 주문 결과 확인
+    public void saveOrder_test() throws Exception {
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/orders/save")
+                        .header("Authorization", token)
+        );
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andExpect(jsonPath("$.response.orderId").value(2));
+
+    }
+
 }

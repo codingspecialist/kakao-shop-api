@@ -79,11 +79,16 @@ INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('47', '1
 INSERT INTO option_tb (`id`,`product_id`,`option_name`,`price`) VALUES ('48', '15', '블랙', '148000');
 
 
-INSERT INTO order_tb (`id`,`user_id`) VALUES ('1', '1');
+INSERT INTO order_tb (`id`,`user_id`) VALUES ('1', '2');
 
 INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('1', '1', '5', '10000', '1');
 INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('2', '2', '5', '10000', '1');
 INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES ('3', '10', '5', '10000', '1');
+
+INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('1', '2', '5', '3', '10000');
+INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('2', '2', '10', '4', '10000');
+INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('3', '2', '11', '5', '10000');
+
 
 
 
