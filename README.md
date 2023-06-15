@@ -1,5 +1,14 @@
 # KAKAO 쇼핑
 
+## 실행 파일 만들기
+```text
+host : localhost:8080
+
+cd kakao-shop-backend
+./gradlew clean build
+java -jar kakao-1.0.jar
+```
+
 ## API 문서
 - http://localhost:8080/docs/api-docs.html
 - http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/docs/api-docs.html
