@@ -49,4 +49,12 @@ public class UserRequest {
         @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).*$", message = "영문,숫자,특수문자가 포함되어야 합니다.")
         private String password;
     }
+
+    @Getter
+    @Setter
+    public static class EmailCheckDTO {
+        @NotEmpty
+        @Pattern(regexp = "^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$", message = "이메일 형식으로 작성해주세요")
+        private String email;
+    }
 }

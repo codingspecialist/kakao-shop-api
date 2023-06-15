@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ActiveProfiles("test")
-@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8080)
+@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 5000)
 @Sql("classpath:db/teardown.sql")
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -33,10 +33,6 @@ public class UserRestControllerTest extends MyRestDoc{
     private MockMvc mvc;
     @Autowired
     private ObjectMapper om;
-    @Autowired
-    private UserJPARepository userRepository;
-    @Autowired
-    private EntityManager em;
 
     @BeforeEach
     public void setUp() {
@@ -63,14 +59,16 @@ public class UserRestControllerTest extends MyRestDoc{
         resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
+    
+    // 회원가입 실패 테스트 코드 추가
 
     // (기능2) 로그인
     @Test
     public void login_test() throws Exception {
         // given
         UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
-        loginDTO.setEmail("alss@nate.com");
-        loginDTO.setPassword("alss1234!");
+        loginDTO.setEmail("ssar@nate.com");
+        loginDTO.setPassword("meta1234!");
 
         String requestBody = om.writeValueAsString(loginDTO);
 
@@ -85,4 +83,6 @@ public class UserRestControllerTest extends MyRestDoc{
         resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
+
+    // 로그인 실패 테스트 코드 추가
 }

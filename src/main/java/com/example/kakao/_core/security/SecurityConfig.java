@@ -49,7 +49,7 @@ public class SecurityConfig {
         http.csrf().disable(); // postman 접근해야 함!! - CSR 할때!!
 
         // 2. iframe 거부
-        http.headers().frameOptions().disable();
+        http.headers().frameOptions().sameOrigin();
 
         // 3. cors 재설정
         http.cors().configurationSource(configurationSource());
@@ -80,7 +80,7 @@ public class SecurityConfig {
 
         // 11. 인증, 권한 필터 설정
         http.authorizeRequests(
-                authorize -> authorize.antMatchers("/carts/**", "/products/**", "/options/**", "/orders/**").authenticated()
+                authorize -> authorize.antMatchers("/carts/**", "/options/**", "/orders/**").authenticated()
                         .antMatchers("/admin/**")
                         .access("hasRole('ADMIN')")
                         .anyRequest().permitAll()

@@ -26,6 +26,8 @@ public class UserService {
 
     @Transactional
     public void join(UserRequest.JoinDTO requestDTO) {
+        sameCheckEmail(requestDTO.getEmail());
+
         requestDTO.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         try {
             userJPARepository.save(requestDTO.toEntity());

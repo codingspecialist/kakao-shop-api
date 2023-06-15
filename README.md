@@ -1,5 +1,20 @@
 # KAKAO 쇼핑
 
+## API 문서
+- url (aws)
+- pdf
+ 
+## 할일
+1. 회원가입 (비밀번호 체크 - 특수문자) - 정규표현식 수정
+2. 회원가입 실패 테스트 다 하고, MD 파일도 실패 테스트 추가
+3. 로그인 (비밀번호 체크 - 특수문자) - 정규표현식 수정
+4. 로그인 실패 테스트 다 하고, MD 파일도 실패 테스트 추가
+5. 이메일 - 테스트 추가
+6. README 변경
+7. html 파일 생성
+8. 사진 변경하고 (비슷한 사진)
+
+
 ## 배포 완료
 - host : http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com
 

@@ -35,8 +35,8 @@ public class UserRestController {
 
     // 사용 안함 - 프론트 요구사항에 이메일 중복 검사 로직 없음.
     @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody Map<String, String> user) {
-        userService.sameCheckEmail(user.get("email"));
+    public ResponseEntity<?> check(@RequestBody @Valid  UserRequest.EmailCheckDTO emailCheckDTO, Errors errors) {
+        userService.sameCheckEmail(emailCheckDTO.getEmail());
         return ResponseEntity.ok(ApiUtils.success(null));
     }
 
