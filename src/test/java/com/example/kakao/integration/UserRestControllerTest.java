@@ -20,11 +20,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.persistence.EntityManager;
 
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ActiveProfiles("test")
-@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 5000)
+@AutoConfigureRestDocs(uriScheme = "http", uriHost = "localhost", uriPort = 8080)
 @Sql("classpath:db/teardown.sql")
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -59,8 +60,90 @@ public class UserRestControllerTest extends MyRestDoc{
         resultActions.andExpect(jsonPath("$.success").value("true"));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
-    
+
     // 회원가입 실패 테스트 코드 추가
+    @Test
+    public void join_fail_test_1() throws Exception {
+        // given
+        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
+        joinDTO.setEmail("cosnate.com");
+        joinDTO.setPassword("cos1234!");
+        joinDTO.setUsername("cos");
+
+        String requestBody = om.writeValueAsString(joinDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("false"));
+        resultActions.andExpect(jsonPath("$.response").value(nullValue()));
+        resultActions.andExpect(jsonPath("$.error.message").value("이메일 형식으로 작성해주세요:email"));
+        resultActions.andExpect(jsonPath("$.error.status").value(400));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    // 회원가입 실패 테스트 코드 추가
+    @Test
+    public void join_fail_test_2() throws Exception {
+        // given
+        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
+        joinDTO.setEmail("cos@nate.com");
+        joinDTO.setPassword("cos1234");
+        joinDTO.setUsername("cos");
+
+        String requestBody = om.writeValueAsString(joinDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("false"));
+        resultActions.andExpect(jsonPath("$.response").value(nullValue()));
+        resultActions.andExpect(jsonPath("$.error.message").value("영문, 숫자, 특수문자가 포함되어야하고 공백이 포함될 수 없습니다.:password"));
+        resultActions.andExpect(jsonPath("$.error.status").value(400));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    // 회원가입 실패 테스트 코드 추가
+    @Test
+    public void join_fail_test_3() throws Exception {
+        // given
+        UserRequest.JoinDTO joinDTO = new UserRequest.JoinDTO();
+        joinDTO.setEmail("ssar@nate.com");
+        joinDTO.setPassword("cos1234!");
+        joinDTO.setUsername("cos");
+
+        String requestBody = om.writeValueAsString(joinDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("false"));
+        resultActions.andExpect(jsonPath("$.response").value(nullValue()));
+        resultActions.andExpect(jsonPath("$.error.message").value("영문, 숫자, 특수문자가 포함되어야하고 공백이 포함될 수 없습니다.:password"));
+        resultActions.andExpect(jsonPath("$.error.status").value(400));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
 
     // (기능2) 로그인
     @Test
