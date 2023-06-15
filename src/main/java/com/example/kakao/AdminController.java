@@ -36,7 +36,6 @@ public class AdminController {
     public String init() throws SQLException {
         ClassPathResource resource = new ClassPathResource("db/teardown.sql");
         ScriptUtils.executeSqlScript(dataSource.getConnection(), resource);
-        dataInit();
         return "Database teardown completed.";
     }
 

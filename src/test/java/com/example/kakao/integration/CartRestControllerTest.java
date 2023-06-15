@@ -49,10 +49,6 @@ public class CartRestControllerTest extends MyRestDoc {
     @Autowired
     private ObjectMapper om;
     @Autowired
-    private UserJPARepository userRepository;
-    @Autowired
-    private EntityManager em;
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     private String token;
@@ -62,7 +58,7 @@ public class CartRestControllerTest extends MyRestDoc {
         // token 발행
         UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
         loginDTO.setEmail("ssar@nate.com");
-        loginDTO.setPassword("1234");
+        loginDTO.setPassword("meta1234!");
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);

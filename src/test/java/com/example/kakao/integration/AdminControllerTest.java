@@ -2,7 +2,7 @@ package com.example.kakao.integration;
 
 import com.example.kakao._core.security.CustomUserDetails;
 import com.example.kakao._core.security.JwtTokenProvider;
-import com.example.kakao.user.UserJPARepository;
+import com.example.kakao.cart.CartRequest;
 import com.example.kakao.user.UserRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,9 +21,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ActiveProfiles("test")
@@ -30,7 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("classpath:db/teardown.sql")
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class ProductRestControllerTest extends MyRestDoc {
+public class AdminControllerTest extends MyRestDoc {
+
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -42,7 +45,7 @@ public class ProductRestControllerTest extends MyRestDoc {
     public void setUp() {
         // token 발행
         UserRequest.LoginDTO loginDTO = new UserRequest.LoginDTO();
-        loginDTO.setEmail("ssar@nate.com");
+        loginDTO.setEmail("admin@nate.com");
         loginDTO.setPassword("meta1234!");
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
@@ -52,44 +55,20 @@ public class ProductRestControllerTest extends MyRestDoc {
     }
 
     @Test
-    // (기능4) 전체 상품 목록 조회
-    public void findAll_test() throws Exception {
+    // (기능8) 장바구니 담기
+    public void reset_test() throws Exception {
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/products")
+                post("/admin/reset")
                         .header("Authorization", token)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
 
-        // verify
-        resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response[0].id").value(1));
-        resultActions.andExpect(jsonPath("$.response[0].productName").value("기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전"));
-        resultActions.andExpect(jsonPath("$.response[0].description").value(""));
-        resultActions.andExpect(jsonPath("$.response[0].image").value("/images/1.jpg"));
-        resultActions.andExpect(jsonPath("$.response[0].price").value(1000));
-        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
-    }
-
-    @Test
-    // (기능5) 개별 상품 상세 조회
-    public void findById_test() throws Exception {
-        // given
-        int id = 1;
-
-        // when
-        ResultActions resultActions = mvc.perform(
-                get("/products/" + id)
-                        .header("Authorization", token)
-        );
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
 
         // verify
-        resultActions.andExpect(jsonPath("$.success").value("true"));
-        resultActions.andExpect(jsonPath("$.response.id").value(1));
-        resultActions.andExpect(jsonPath("$.response.productName").value("기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전"));
-        resultActions.andExpect(jsonPath("$.response.description").value(""));
-        resultActions.andExpect(jsonPath("$.response.image").value("/images/1.jpg"));
-        resultActions.andExpect(jsonPath("$.response.price").value(1000));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 }
