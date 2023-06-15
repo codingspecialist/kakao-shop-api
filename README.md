@@ -2,7 +2,7 @@
 
 ## API 문서
 - http://localhost:8080/docs/api-docs.html
-- http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/api-docs.html
+- http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/docs/api-docs.html
 
 ## PDF 사용자 시나리오
 - 추가예정
