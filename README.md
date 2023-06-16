@@ -13,8 +13,9 @@ java -jar kakao-1.0.jar
 - http://localhost:8080/docs/api-docs.html
 - http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/docs/api-docs.html
 
-## PDF 사용자 시나리오
-- 추가예정
+## 사용자 시나리오 API PDF 문서
+- http://localhost:8080/docs/api-pdf.pdf
+- http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com/docs/api-pdf.pdf
 
 ## 배포된 서버 주소
 - host : http://kakao-app-env.eba-ggmpdnhz.ap-northeast-2.elasticbeanstalk.com
