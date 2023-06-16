@@ -1,17 +1,18 @@
 # KAKAO 쇼핑
 
-## 실행 파일 만들기
+## 로컬에서 실행 파일 만들기
 ```text
 host : localhost:8080
 
-git clone {repo address}
-cd kakao-shop-api
-./gradlew clean build
-cd build/libs
-위 경로에 jar파일이 생성됩니다
-jar 파일 동일겅로에 images 폴더를 카피 한뒤 아래 명령어로 실행해주세요
-images폴더는 프로젝트 내부에 있습니다
-java -jar kakao-1.0.jar
+1. git clone https://github.com/codingspecialist/kakao-shop-api.git
+2. 다운 받은 프로젝트 폴더(kakao-shop-api) 내부로 들어가서 git bash를 열어주세요. Mac 사용자는 터미널을 이용해서 해당 경로로 가세요.
+3. ./gradlew clean build
+4. 윈도우 사용자는 git bash를 이용하여 터미널을 열고 3번 명령어를 실행해주세요.
+5. cd build/libs
+6. 위 경로에 kakao-1.0.jar파일이 생성됩니다
+7. jar 파일 동일 경로에 images 폴더를 카피 한뒤 아래 명령어로 실행해주세요
+8. images폴더는 kakao-shop-api/images 경로에 있습니다.
+9. java -jar -Dspring.profiles.active=local kakao-1.0.jar
 ```
 
 ## API 문서
