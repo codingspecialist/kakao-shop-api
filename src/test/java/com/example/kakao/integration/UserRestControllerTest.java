@@ -324,7 +324,7 @@ public class UserRestControllerTest extends MyRestDoc{
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
     @Test
-    public void check_fail_test() throws Exception {
+    public void check_fail_test_1() throws Exception {
         // given
         UserRequest.EmailCheckDTO emailCheckDTO = new UserRequest.EmailCheckDTO();
         emailCheckDTO.setEmail("ssar@nate.com");
@@ -344,6 +344,31 @@ public class UserRestControllerTest extends MyRestDoc{
         resultActions.andExpect(jsonPath("$.success").value("false"));
         resultActions.andExpect(jsonPath("$.response").value(nullValue()));
         resultActions.andExpect(jsonPath("$.error.message").value("동일한 이메일이 존재합니다 : ssar@nate.com"));
+        resultActions.andExpect(jsonPath("$.error.status").value(400));
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void check_fail_test_2() throws Exception {
+        // given
+        UserRequest.EmailCheckDTO emailCheckDTO = new UserRequest.EmailCheckDTO();
+        emailCheckDTO.setEmail("codenate.com");
+
+        String requestBody = om.writeValueAsString(emailCheckDTO);
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/check")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
+
+        // verify
+        resultActions.andExpect(jsonPath("$.success").value("false"));
+        resultActions.andExpect(jsonPath("$.response").value(nullValue()));
+        resultActions.andExpect(jsonPath("$.error.message").value("이메일 형식으로 작성해주세요:email"));
         resultActions.andExpect(jsonPath("$.error.status").value(400));
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }

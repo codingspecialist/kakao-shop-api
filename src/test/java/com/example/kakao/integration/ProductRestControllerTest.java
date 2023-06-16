@@ -58,7 +58,6 @@ public class ProductRestControllerTest extends MyRestDoc {
         // when
         ResultActions resultActions = mvc.perform(
                 get("/products")
-                        .header("Authorization", token)
         );
 
         // verify
@@ -80,7 +79,6 @@ public class ProductRestControllerTest extends MyRestDoc {
         // when
         ResultActions resultActions = mvc.perform(
                 get("/products/" + id)
-                        .header("Authorization", token)
         );
 
         // verify
