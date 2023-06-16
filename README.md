@@ -4,8 +4,11 @@
 ```text
 host : localhost:8080
 
-cd kakao-shop-backend
+git clone {repo address}
+cd kakao-shop-api
 ./gradlew clean build
+jar 파일 동일겅로에 images 폴더를 카피 한뒤 아래 명령어로 실행해주세요
+images폴더는 프로젝트 내부에 있습니다
 java -jar kakao-1.0.jar
 ```
 
