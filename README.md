@@ -25,7 +25,7 @@ host : localhost:8080
 
 ## 사용자 시나리오 API PDF 문서
 - http://localhost:8080/docs/api-pdf.pdf
-- backup-data-v2/api-pdf.pdf
+- https://github.com/codingspecialist/kakao-shop-api/blob/master/backup-data-v2/api-pdf.pdf
 
 ## 배포된 서버 주소
 - host : http://kakao-app-env.eba-kfsgeb74.ap-northeast-2.elasticbeanstalk.com
