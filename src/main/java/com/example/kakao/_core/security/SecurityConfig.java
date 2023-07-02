@@ -54,7 +54,7 @@ public class SecurityConfig {
         // 3. cors 재설정
         http.cors().configurationSource(configurationSource());
 
-        // 4. jSessionId 사용 거부
+        // 4. jSessionId 사용 거부 (5번을 설정하면 jsessionId가 거부되기 때문에 4번은 사실 필요 없다)
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // 5. form 로긴 해제 (UsernamePasswordAuthenticationFilter 비활성화)
