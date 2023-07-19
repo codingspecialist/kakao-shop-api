@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kakao-shop-backend.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kakao-shop-backend.kakao.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kakao.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.kakao-shop-backend.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.kakao-shop-backend.kakao.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/step3.kakao-shop-api.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/step3.kakao-shop-api.kakao.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/workspace.kakao.main.iml" filepath="$PROJECT_DIR$/.idea/modules/workspace.kakao.main.iml" />
     </modules>
   </component>

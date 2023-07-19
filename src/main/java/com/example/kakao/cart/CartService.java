@@ -41,16 +41,27 @@ public class CartService {
             }
         }
 
-        List<Cart> cartList = requestDTOs.stream().map(cartDTO -> {
-            Option optionPS = optionJPARepository.findById(cartDTO.getOptionId()).orElseThrow(
-                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+cartDTO.getOptionId())
+        List<Cart> cartList = requestDTOs.stream().map(saveDTO -> {
+            Option optionPS = optionJPARepository.findById(saveDTO.getOptionId()).orElseThrow(
+                    ()-> new Exception404("해당 옵션을 찾을 수 없습니다 : "+saveDTO.getOptionId())
             );
-            return cartDTO.toEntity(optionPS, user);
+            return saveDTO.toEntity(optionPS, user);
         }).collect(Collectors.toList());
 
+
+
+        // option.getPrice() * quantity
         cartList.forEach(cart -> {
             try {
-                cartJPARepository.save(cart);
+                Optional<Cart> cartOP = cartJPARepository.findByOptionId(cart.getOption().getId());
+                if(cartOP.isPresent()){
+                    Cart cartPS = cartOP.get();
+                    int updateQuantity = cartPS.getQuantity()+cart.getQuantity();
+                    cartPS.update(updateQuantity, cartPS.getOption().getPrice() * updateQuantity);
+                }else{
+                    cartJPARepository.save(cart);
+                }
+
             }catch (Exception e){
                 throw new Exception500("장바구니 담기 중에 오류가 발생했습니다 : "+e.getMessage());
             }
