@@ -53,7 +53,7 @@ public class CartService {
         // option.getPrice() * quantity
         cartList.forEach(cart -> {
             try {
-                Optional<Cart> cartOP = cartJPARepository.findByOptionId(cart.getOption().getId());
+                Optional<Cart> cartOP = cartJPARepository.findByOptionIdAndUserId(cart.getOption().getId(), user.getId());
                 if(cartOP.isPresent()){
                     Cart cartPS = cartOP.get();
                     int updateQuantity = cartPS.getQuantity()+cart.getQuantity();
